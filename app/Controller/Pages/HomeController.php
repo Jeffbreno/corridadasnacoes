@@ -10,11 +10,8 @@ class HomeController extends PageController
     public static function getHome()
     {
         $obOrganization = new Organization;
-        $content = View::render('pages/home', [
-            'name' => $obOrganization->name,
-            'description' => $obOrganization->description
-        ]);
+        $content = View::render('pages/home', []);
 
-        return parent::getPage('Site Igreja', $content);
+        return parent::getPage('Corrida das Nações', $content);
     }
 }

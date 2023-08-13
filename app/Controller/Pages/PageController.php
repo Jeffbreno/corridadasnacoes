@@ -147,11 +147,11 @@ class PageController
      */
     public static function getPage($title, $content)
     {
-        return View::render('pages/page', [
-            'title' => $title,
-            'header' => self::getHeader(),
-            'content' => $content,
-            'footer' => self::getFooter(),
+        return View::render('pages/index', [
+            'titulo' => $title,
+            //'header' => self::getHeader(),
+            'conteudo' => $content,
+            //'footer' => self::getFooter(),
         ]);
     }
 }
