@@ -84,7 +84,7 @@
     const headerScrolled = () => {
       if (window.scrollY > 100) {
         selectHeader.classList.add("header-scrolled");
-        element.style.color = '#B8860B';
+        element.style.color = '#010066';
       } else {
         selectHeader.classList.remove("header-scrolled");
         element.style.color = '#FFF';
