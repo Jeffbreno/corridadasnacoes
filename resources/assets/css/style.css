@@ -1,4 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/boowie');
+@import url("https://fonts.cdnfonts.com/css/boowie");
 
 /*--------------------------------------------------------------
 # General
@@ -116,15 +116,16 @@ h6 {
 #header {
   transition: all 0.5s;
   z-index: 997;
-  padding: 15px 0;
+  /* padding: 15px 0; */
 }
 
 #header.header-scrolled,
 #header.header-inner-pages {
-  /* background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .5); */
-  background: rgb(255,255,255);
-  background: linear-gradient(180deg, rgba(255,255,255,1) 55%, rgba(243,243,243,1) 55%);
+  -webkit-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.76);
+  -moz-box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.76);
+  box-shadow: 0px 10px 5px 0px rgba(0, 0, 0, 0.76);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 55%, rgba(243, 243, 243, 1) 55%);
 }
 
 #header .logo {
@@ -159,7 +160,8 @@ h6 {
 
 .navbar {
   padding: 0;
-  font-family: 'BOOWIE', sans-serif;
+  font-family: "BOOWIE", sans-serif;
+  letter-spacing: 2px;
 }
 
 .navbar ul {
@@ -194,6 +196,10 @@ h6 {
   margin-left: 5px;
 }
 
+.nav-link.inscricao {
+  height: 100px;
+}
+
 .navbar a:hover,
 .navbar .active,
 .navbar .active:focus,
@@ -201,7 +207,7 @@ h6 {
   color: #2020c4;
 }
 
-.navbar .dropdown ul {
+/* .navbar .dropdown ul {
   display: block;
   position: absolute;
   left: 14px;
@@ -255,7 +261,7 @@ h6 {
   top: 0;
   left: 100%;
   visibility: visible;
-}
+} */
 
 @media (max-width: 1366px) {
   .navbar .dropdown .dropdown ul {
@@ -271,7 +277,6 @@ h6 {
 * Mobile Navigation 
 */
 .mobile-nav-toggle {
-  color: #fff;
   font-size: 28px;
   cursor: pointer;
   display: none;

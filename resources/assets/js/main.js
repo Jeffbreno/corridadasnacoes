@@ -80,14 +80,17 @@
    */
   let selectHeader = select("#header");
   const element = document.querySelector('.navbar');
+  const toggle = document.querySelector('.mobile-nav-toggle');
   if (selectHeader) {
     const headerScrolled = () => {
       if (window.scrollY > 100) {
         selectHeader.classList.add("header-scrolled");
         element.style.color = '#010066';
+        toggle.style.color = '#010066';
       } else {
         selectHeader.classList.remove("header-scrolled");
         element.style.color = '#FFF';
+        toggle.style.color = '#FFF';
       }
     };
     window.addEventListener("load", headerScrolled);
