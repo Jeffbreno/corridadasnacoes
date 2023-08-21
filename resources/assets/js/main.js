@@ -1,10 +1,3 @@
-/**
- * Template Name: Gp
- * Updated: Jul 27 2023 with Bootstrap v5.3.1
- * Template URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/
- * Author: BootstrapMade.com
- * License: https://bootstrapmade.com/license/
- */
 (function () {
   "use strict";
 
@@ -79,18 +72,58 @@
    * Toggle .header-scrolled class to #header when page is scrolled
    */
   let selectHeader = select("#header");
-  const element = document.querySelector('.navbar');
-  const toggle = document.querySelector('.mobile-nav-toggle');
+  const inscricaoBotao = document.querySelectorAll(".inscricao-menu-botao");
+  const inscricaoLink = document.querySelectorAll(".inscricao-menu-link");
+  const element = document.querySelector(".navbar");
+  const logo = document.querySelector(".logo");
+  const toggle = document.querySelector(".mobile-nav-toggle");
+  const screenWidth = window.innerWidth;
   if (selectHeader) {
     const headerScrolled = () => {
-      if (window.scrollY > 100) {
-        selectHeader.classList.add("header-scrolled");
-        element.style.color = '#010066';
-        toggle.style.color = '#010066';
+      if (screenWidth > 768) {
+        if (window.scrollY > 100) {
+          selectHeader.classList.add("header-scrolled");
+          element.style.color = "#010066";
+          logo.style.marginTop = "";
+          toggle.style.color = "#010066";
+          element.style.textShadow = "";
+          inscricaoBotao.forEach(function (botao) {
+            botao.style.display = "";
+          });
+          inscricaoLink.forEach(function (link) {
+            link.style.display = "none";
+          });
+        } else {
+          selectHeader.classList.remove("header-scrolled");
+          element.style.textShadow = "black 0.1em 0.1em 0.2em";
+          logo.style.marginTop = "15px";
+          element.style.color = "#FFF";
+          toggle.style.color = "#FFF";
+          inscricaoBotao.forEach(function (botao) {
+            botao.style.display = "none";
+          });
+          inscricaoLink.forEach(function (link) {
+            link.style.display = "";
+          });
+        }
       } else {
-        selectHeader.classList.remove("header-scrolled");
-        element.style.color = '#FFF';
-        toggle.style.color = '#FFF';
+        element.style.textShadow = "";
+        logo.style.marginTop = "15px";
+        inscricaoBotao.forEach(function (botao) {
+          botao.style.display = "none";
+        });
+        if (window.scrollY > 100) {
+          selectHeader.classList.add("header-scrolled");
+          element.style.color = "#010066";
+          toggle.style.color = "#010066";
+          inscricaoLink.forEach(function (link) {
+            link.style.display = "";
+          });
+        } else {
+          selectHeader.classList.remove("header-scrolled");
+          element.style.color = "#FFF";
+          toggle.style.color = "#FFF";
+        }
       }
     };
     window.addEventListener("load", headerScrolled);
@@ -107,6 +140,19 @@
         backtotop.classList.add("active");
       } else {
         backtotop.classList.remove("active");
+      }
+    };
+    window.addEventListener("load", toggleBacktotop);
+    onscroll(document, toggleBacktotop);
+  }
+
+  let backtotopWhatsApp = select(".back-to-top-whatsapp");
+  if (backtotopWhatsApp) {
+    const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+        backtotopWhatsApp.classList.add("active");
+      } else {
+        backtotopWhatsApp.classList.remove("active");
       }
     };
     window.addEventListener("load", toggleBacktotop);
@@ -218,50 +264,16 @@
   });
 
   /**
-   * Porfolio isotope and filter
+   * Initiate galeria lightbox
    */
-  window.addEventListener("load", () => {
-    let portfolioContainer = select(".portfolio-container");
-    if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: ".portfolio-item",
-      });
-
-      let portfolioFilters = select("#portfolio-flters li", true);
-
-      on(
-        "click",
-        "#portfolio-flters li",
-        function (e) {
-          e.preventDefault();
-          portfolioFilters.forEach(function (el) {
-            el.classList.remove("filter-active");
-          });
-          this.classList.add("filter-active");
-
-          portfolioIsotope.arrange({
-            filter: this.getAttribute("data-filter"),
-          });
-          portfolioIsotope.on("arrangeComplete", function () {
-            AOS.refresh();
-          });
-        },
-        true
-      );
-    }
+  const galeriaLightbox = GLightbox({
+    selector: ".galeria-lightbox",
   });
 
   /**
-   * Initiate portfolio lightbox
+   * galeria details slider
    */
-  const portfolioLightbox = GLightbox({
-    selector: ".portfolio-lightbox",
-  });
-
-  /**
-   * Portfolio details slider
-   */
-  new Swiper(".portfolio-details-slider", {
+  new Swiper(".galeria-details-slider", {
     speed: 400,
     loop: true,
     autoplay: {
@@ -304,9 +316,4 @@
       mirror: false,
     });
   });
-
-  /**
-   * Initiate Pure Counter
-   */
-  new PureCounter();
 })();

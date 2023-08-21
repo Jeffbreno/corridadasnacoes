@@ -124,6 +124,12 @@ class PageController
             ]);
         }
     }
+
+    private static function getHeaderIncricoes()
+    {
+        return View::render('pages/header.inscricoes');
+    }
+
     /**
      * Método responsável por redenrizar o topo da página
      * @return string
@@ -141,17 +147,47 @@ class PageController
     {
         return View::render('pages/footer');
     }
+
+    /**
+     * Método responsável por redenrizar a capa
+     * @return string
+     */
+    private static function getInicio()
+    {
+        return View::render('pages/capa');
+    }
+
+    /**
+     * Método responsável por redenrizar a o rodapé da capa
+     * @return string
+     */
+    private static function getFooterCapa()
+    {
+        return View::render('pages/acorrida');
+    }
     /**
      * Método responsável por retornar o conteúdo (view) da página genérica
      * @return string
      */
     public static function getPage($title, $content)
     {
-        return View::render('pages/index', [
+        return View::render('pages/layout/layout.page', [
             'titulo' => $title,
-            //'header' => self::getHeader(),
+            'header' => self::getHeader(),
+            'capa' => self::getInicio(),
+            'ACorrida' => self::getFooterCapa(),
             'conteudo' => $content,
-            //'footer' => self::getFooter(),
+            'footer' => self::getFooter(),
+        ]);
+    }
+
+    public static function getPageTelas($title, $content)
+    {
+        return View::render('pages/layout/layout.page.telas', [
+            'titulo' => $title,
+            'header' => self::getHeaderIncricoes(),
+            'conteudo' => $content,
+            'footer' => self::getFooter(),
         ]);
     }
 }

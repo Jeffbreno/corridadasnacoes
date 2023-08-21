@@ -1,0 +1,38 @@
+<style>
+  .list-group-item:hover {
+    background-color: #000066;
+    cursor: pointer;
+    color: #fff;
+  }
+  section {
+    height: 100vh;
+  }
+
+  section p {
+    font-size: 2rem;
+    padding-bottom: 35px;
+  }
+</style>
+<section id="tipo">
+  <div class="container mt-5">
+    <div class="col-lg-8 offset-lg-2">
+      <img src="{{URL}}/resources/assets/img/segundo-passo.png" class="img-fluid rounded-top mb-5" alt="" />
+      {{status}} 
+      
+      ticket: {{ticket}} 
+      
+      <p>Olá atleta <b>{{nome}}</b>
+      falta pouco, no momento estamos fazendo o processo de pagamento por confirmação no nosso whatsapp, por favor, clique no botão continuar, para confirmamos sua participação</p> 
+      <div class="text-center">
+        <a class="nav-link scrollto" target="_blank" href="https://api.whatsapp.com/send?phone=558496903658">
+          <div class="tilted-button-container">
+            <button class="tilted-button">
+              <div class="button-text">Continuar</div>
+            </button>
+            <div class="button-line"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

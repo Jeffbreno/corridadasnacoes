@@ -1,0 +1,54 @@
+<style>
+  .list-group-item:hover {
+    background-color: #000066;
+    cursor: pointer;
+    color: #fff;
+  }
+  section {
+    height: 100vh;
+  }
+
+  section p {
+    font-size: 2rem;
+    padding-bottom: 35px;
+  }
+</style>
+<section id="tipo">
+  <div class="container mt-5">
+    <div class="col-lg-6 offset-lg-3">
+      <form method="post" action="{{URL}}/cadastrar/inscricao">
+        <p>Selecione sua categoria</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <label>
+              <input type="radio" name="categoria" value="1" required /> Inscrições abertas ao público - 1º Lote Geral - R$
+              89,90
+            </label>
+          </li>
+          <li class="list-group-item">
+            <label>
+              <input type="radio" name="categoria" value="2" required /> Portadores de Necessidades Especiais - R$ 44,95 (requer comprovação)
+            </label>
+          </li>
+          <li class="list-group-item">
+            <label>
+              <input type="radio" name="categoria" value="3" required /> Doador de Sangue - R$ 44,95 (requer
+              comprovação)
+            </label>
+          </li>
+          <li class="list-group-item">
+            <label> <input type="radio" name="categoria" value="4" required /> Kids - R$ 49,90 (até 12 anos) </label>
+          </li>
+        </ul>
+        <div class="text-center mt-3">
+          <div class="tilted-button-container">
+            <button type="submit" class="tilted-button">
+              <div class="button-text">Enviar</div>
+            </button>
+            <div class="button-line"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
