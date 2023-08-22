@@ -572,7 +572,7 @@ section {
 }
 
 .camisas .content h3 {
-  font-size: 45px;
+  font-size: 35px;
 }
 
 .camisas .content h4 {
@@ -663,6 +663,13 @@ section {
 
 .inscricao .texto-primeiro-lote {
   font-size: 25px;
+}
+
+.btn-inscricao img {
+  transition: transform 0.2s;
+}
+.btn-inscricao img:hover {
+  transform: scale(1.1);
 }
 
 /*--------------------------------------------------------------
