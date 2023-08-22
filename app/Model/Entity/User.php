@@ -8,10 +8,10 @@ class User extends Model
 {
     protected $table = 'usuarios';
     //CAMPOS USADOS NA TABELA DE DADOS
-    protected $fillable = ['nome', 'email', 'senha'];
-    public $timestamps = false;
-
-
+    protected $fillable = ['nome', 'email', 'senha', 'id_alteracao'];
+    public $timestamps = true;
+    const CREATED_AT = 'dt_cadastro';
+    const UPDATED_AT = 'dt_alteracao';
     /**
      * Método responsável por retornar busca por ID de usuario
      *

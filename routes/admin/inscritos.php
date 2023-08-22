@@ -4,72 +4,72 @@ use App\Http\Response;
 use App\Controller\Admin;
 
 //ROTA DA LISTAGEM DE DEPOIMENTOS
-$obRouter->get('/admin/testimonies', [
+$obRouter->get('/admin/inscritos', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request) {
-        return new Response(200, Admin\TestimoniesController::getTestimonies($request));
+        return new Response(200, Admin\InscricoesController::getInscrito($request));
     }
 ]);
 
 //ROTA DE CADASTRO DE DEPOIMENTOS
-$obRouter->get('/admin/testimonies/new', [
+$obRouter->get('/admin/inscritos/new', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request) {
-        return new Response(200, Admin\TestimoniesController::getNewTestimonies($request));
+        return new Response(200, Admin\InscricoesController::getNewInscrito($request));
     }
 ]);
 
 //ROTA DE CADASTRO DE DEPOIMENTOS
-$obRouter->post('/admin/testimonies/new', [
+$obRouter->post('/admin/inscritos/new', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request) {
-        return new Response(200, Admin\TestimoniesController::setNewTestimonies($request));
+        return new Response(200, Admin\InscricoesController::setNewInscrito($request));
     }
 ]);
 
 //ROTA DE EDIÇÃO DE DEPOIMENTOS
-$obRouter->get('/admin/testimonies/{id}/edit', [
+$obRouter->get('/admin/inscritos/{id}/edit', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Admin\TestimoniesController::getEditTestimonies($request, $id));
+        return new Response(200, Admin\InscricoesController::getEditInscrito($request, $id));
     }
 ]);
 
 
 //ROTA DE EDIÇÃO DE DEPOIMENTOS
-$obRouter->post('/admin/testimonies/{id}/edit', [
+$obRouter->post('/admin/inscritos/{id}/edit', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Admin\TestimoniesController::setEditTestimonies($request, $id));
+        return new Response(200, Admin\InscricoesController::setEditInscrito($request, $id));
     }
 ]);
 
 //ROTA DE EXCLUSÃO DE DEPOIMENTOS
-$obRouter->get('/admin/testimonies/{id}/delete', [
+$obRouter->get('/admin/inscritos/{id}/delete', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Admin\TestimoniesController::getDeleteTestimonies($request, $id));
+        return new Response(200, Admin\InscricoesController::getDeleteInscrito($request, $id));
     }
 ]);
 
 //ROTA DE EXCLUSÃO DE DEPOIMENTOS
-$obRouter->post('/admin/testimonies/{id}/delete', [
+$obRouter->post('/admin/inscritos/{id}/delete', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Admin\TestimoniesController::setDeleteTestimonies($request, $id));
+        return new Response(200, Admin\InscricoesController::setDeleteInscrito($request, $id));
     }
 ]);

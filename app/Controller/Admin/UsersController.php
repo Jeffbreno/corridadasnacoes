@@ -61,6 +61,7 @@ class UsersController extends PageController
             $resultItems .= View::render('admin/users/item', [
                 'id' => $users->id,
                 'nome' => $users->nome,
+                'login' => $users->login,
                 'email' => $users->email
             ]);
         }
@@ -109,6 +110,7 @@ class UsersController extends PageController
         $postVars = $request->getPostVars();
         $nome = $postVars['nome'] ?? '';
         $email = $postVars['email'] ?? '';
+        $login = $postVars['login'] ?? '';
         $senha = $postVars['senha'] ?? '';
 
         //VALIDAR EMAIL DO USUÁRIO
@@ -120,6 +122,7 @@ class UsersController extends PageController
 
         $obUser = new EntityUser;
         $obUser->nome = $nome;
+        $obUser->login = $login;
         $obUser->email = $email;
         $obUser->senha = password_hash($senha, PASSWORD_DEFAULT);
 
@@ -146,6 +149,7 @@ class UsersController extends PageController
         $content = View::render('admin/users/form', [
             'title' => 'Editar usuário',
             'nome' => $obUser->nome,
+            'login'=> $obUser->login,
             'email' => $obUser->email,
             'status' => self::getStatus($request)
         ]);

@@ -19,9 +19,9 @@ class PageController
             'data-feather' => 'sliders'
 
         ],
-        'testimonies' => [
-            'label' => 'Depoimentos',
-            'link' => URL . '/admin/testimonies',
+        'inscritos' => [
+            'label' => 'Inscritos',
+            'link' => URL . '/admin/inscritos',
             'data-feather' => 'book'
 
         ],
@@ -43,6 +43,7 @@ class PageController
         } else {
             $queryParams['page'] = $page['page'];
         }
+
         #LINK
         if ($page['page'] == 0) {
             $link = $url . '?page=1';
@@ -52,7 +53,7 @@ class PageController
 
 
         #VIEW
-        return View::render('pages/pagination/link', [
+        return View::render('admin/pagination/link', [
             'page' => $ultimaPagina ? 'Última' : ($page['page'] == 0 ? 'Primeira' : $page['page']),
             'link' => $link,
             'active' => ($page['current'] ? 'active' : '')
@@ -137,10 +138,11 @@ class PageController
                 }
 
                 $links .= self::getLinks($page, $url);
+
             }
 
             #REDERIZA BOX DOS LINKS
-            return View::render('pages/pagination/box', [
+            return View::render('admin/pagination/box', [
                 'links' => $links,
             ]);
         }
