@@ -411,7 +411,7 @@ section .tilted-button {
 #footer {
   background: url("../img/bg-5.jpg") center repeat-x;
   border-top: 16px solid #01004e;
-  height: 130px;
+  min-height: 130px;
   color: #fff;
   font-size: 14px;
   bottom: 0;
@@ -428,6 +428,12 @@ section .tilted-button {
   font-family: "Agency FB", sans-serif;
   letter-spacing: 0.15rem;
   transform: scaleY(0.4);
+}
+
+@media (max-width: 1024px) {
+  #footer p {
+    font-size: 1.6rem;
+  }
 }
 
 #footer img {
