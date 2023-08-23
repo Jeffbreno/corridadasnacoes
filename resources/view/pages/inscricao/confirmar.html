@@ -12,19 +12,30 @@
     font-size: 2rem;
     padding-bottom: 35px;
   }
+
+  section span {
+    color: #e61234;
+    font-weight: 700;
+  }
 </style>
 <section id="tipo">
   <div class="container mt-5">
     <div class="col-lg-8 offset-lg-2">
       <img src="{{URL}}/resources/assets/img/segundo-passo.png" class="img-fluid rounded-top mb-5" alt="" />
-      {{status}} 
-      
-      ticket: {{ticket}} 
-      
-      <p>Olá atleta <b>{{nome}}</b>
-      falta pouco, no momento estamos fazendo o processo de pagamento por confirmação no nosso whatsapp, por favor, clique no botão continuar, para confirmamos sua participação</p> 
+      ticket: {{ticket}}
+
+      <p>
+        Olá atleta <b>{{nome}}</b> falta pouco, foi enviado o link para o pagamento da sua corrida no e-mail informado no ato
+        da inscrição, ao acessar, pediremos as confirmções de dados do atleta e sua forma preferêncial de pagamento, se
+        desejar pagar agora clique no botão CONTINUAR logo a baixo. <br /><br />
+
+        <span>
+          IMPORTANTE: Na primeira tela do link de pagamento, por favor, confirme os mesmos dados do atleta independente de
+          quem realizara o pagamento, para que possamos localiza-lo melhor
+        </span>
+      </p>
       <div class="text-center">
-        <a class="nav-link scrollto" target="_blank" href="https://api.whatsapp.com/send?phone=558496903658">
+        <a class="nav-link scrollto" target="_blank" href="{{botaoPagseguro}}/button">
           <div class="tilted-button-container">
             <button class="tilted-button">
               <div class="button-text">Continuar</div>

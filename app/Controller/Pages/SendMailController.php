@@ -38,7 +38,7 @@ class SendMailController
         $cpf = $destinatario['cpf'];
         switch ($destinatario['categoria']) {
             case 1:
-                $categoria = 'Inscrições abertas ao público';
+                $categoria = 'Público Geral';
                 break;
             case 2:
                 $categoria = 'Portadores de Necessidades Especiais';
@@ -50,7 +50,7 @@ class SendMailController
                 $categoria = 'Kids';
                 break;
             default:
-                $categoria = 'Inscrições abertas ao público';
+                $categoria = 'Público Geral';
                 break;
         }
         if ($destinatario['genero'] === 'M') {
@@ -106,7 +106,10 @@ class SendMailController
             $msg .= "<br />Camisa unissex tamanho: " . $camisa;
             $msg .= "<br />Equipe: " . $equipe;
 
-            $this->mail->Body = $msg;
+            $msg .= '<br />Link para pagamento:';
+            $msg .= InscricoesController::getBotao($destinatario['categoria']);
+
+            $this->mail->msgHTML($msg);
 
             $this->mail->Send();
             return true;

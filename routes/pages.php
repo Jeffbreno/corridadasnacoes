@@ -34,7 +34,7 @@ $obRouter->get('/tipo/inscricao', [
 ]);
 
 //ROTA INSCRIÇÃO
-$obRouter->post('/inscricao/confirmada', [
+$obRouter->post('/inscricao/confirmar', [
     function ($request) {
         return new Response(200, Pages\InscricoesController::getConfirmeInscricao($request));
     }

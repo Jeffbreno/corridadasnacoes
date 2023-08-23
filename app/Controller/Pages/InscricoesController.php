@@ -104,6 +104,27 @@ class InscricoesController extends PageController
         return self::getConfirmeInscricao($request, $ticket);
     }
 
+    public static function getBotao($categoria): string
+    {
+        switch ($categoria) {
+            case 1:
+                return 'https://pag.ae/7ZHEeBbr4';
+                break;
+            case 2:
+                return  'https://pag.ae/7ZHEgG6hJ';
+                break;
+            case 3:
+                return  'https://pag.ae/7ZHEg5mcJ';
+                break;
+            case 4:
+                return 'https://pag.ae/7ZHEhePKo';
+                break;
+            default:
+                return 'https://pag.ae/7ZHEeBbr4';
+                break;
+        }
+    }
+
     public static function getConfirmeInscricao(Request $request, $ticket = null): string
     {
         $postVars = $request->getPostVars();
@@ -115,8 +136,9 @@ class InscricoesController extends PageController
         $content = View::render('pages/inscricao/confirmar', [
             'ticket' => str_pad($ticket, 4, '0', STR_PAD_LEFT),
             'nome' => $nome,
-            'mensagem' => $email,
-            'status' => self::getStatus($request)
+            'email' => $email,
+            'botaoPagseguro' => self::getBotao($postVars['categoria']),
+            // 'status' => self::getStatus($request)
         ]);
 
         return parent::getPageTelas('&raquo;Confirmar', $content);
