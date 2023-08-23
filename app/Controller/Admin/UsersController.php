@@ -98,6 +98,7 @@ class UsersController extends PageController
         $content = View::render('admin/users/form', [
             'nome' => null,
             'email' => null,
+            'login' => null,
             'senha' => null,
             'status' => self::getStatus($request)
         ]);
