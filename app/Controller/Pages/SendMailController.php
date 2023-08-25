@@ -82,6 +82,8 @@ class SendMailController
             $this->mail->Subject = ('Corrida das Nações "Cadastro Realizado com Sucesso!" - Nº ticket: ' . $ticket);
             // $msg = "Parabéns " . $nome . "!";
 
+            $link =  "<a href=\"" . InscricoesController::getBotao($destinatario['categoria']) . "\" target=\"_blank\" title=\"Pagar com PagSeguro\"><img src=\"https://assets.pagseguro.com.br/ps-integration-assets/botoes/pagamentos/205x30-pagar.gif\" alt=\"Pague com PagSeguro - é rápido, grátis e seguro!\" /></a>";
+
             $msg = "A primeira etapa de sua inscrição na CORRIDA DAS NAÇÕES 2023 foi concluída com sucesso!!!<br />";
             $msg .= "Estamos validando o seu seu cadastro e em breve nossa equipe entrará em contato para informar o pagamento<br /><br />";
 
@@ -89,7 +91,8 @@ class SendMailController
             $msg .= "Acompanhe todas as notícias sobre o evento através do nosso Instagram @corridadasnacoes<br />";
             $msg .= "confira abaixo seus dados enviados, caso tenha alguma incongruência entre em contato conosco no whatsapp.<br /><br />";
 
-            $msg .= "Nome e Sobrenome: " . $nome;
+            $msg .= '<br />Link para pagamento: <br />' . $link;
+            $msg .= "<br /><br />Nome e Sobrenome: " . $nome;
             $msg .= "<br />E-mail: " . $email;
             $msg .= "<br />Sexo: $genero";
             $msg .= "<br />CPF: " . $cpf;
@@ -105,9 +108,6 @@ class SendMailController
             $msg .= "<br />Distância: " . $distancia;
             $msg .= "<br />Camisa unissex tamanho: " . $camisa;
             $msg .= "<br />Equipe: " . $equipe;
-
-            $msg .= '<br />Link para pagamento:';
-            $msg .= InscricoesController::getBotao($destinatario['categoria']);
 
             $this->mail->msgHTML($msg);
 
