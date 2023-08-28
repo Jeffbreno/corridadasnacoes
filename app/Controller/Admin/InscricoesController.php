@@ -61,7 +61,8 @@ class InscricoesController extends PageController
 
     public static function getModal($id): string
     {
-        return View::render('admin/inscritos/modal', ['nome' => $id]);
+        $obInscrito = EntityIncritos::find($id);
+        return $obInscrito;
     }
 
     /**
@@ -78,7 +79,8 @@ class InscricoesController extends PageController
             'descricao' => 'Lista de inscritos cadastrados no site',
             'itens' => self::getInscritoItems($request, $obPagination),
             'pagination' => parent::getPagination($request, $obPagination),
-            'status' => self::getStatus($request)
+            'status' => self::getStatus($request),
+            'modal' => View::render('admin/inscritos/modal')
         ]);
 
         #RETORNA A PÁGINA COMPLETA

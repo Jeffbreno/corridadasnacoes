@@ -1,6 +1,10 @@
 (function (doc) {
   "use strict";
 
+  function carregarModal(){
+    
+  }
+
   function excluirItem(idDoItem) {
     console.log(idDoItem);
     // Fazer a requisição AJAX para excluir o item

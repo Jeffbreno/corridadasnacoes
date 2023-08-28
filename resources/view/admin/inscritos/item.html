@@ -1,14 +1,18 @@
-<tr>
+<tr class="text-sm">
   <td>{{id}}</td>
   <td>{{nome}}</td>
   <td>{{email}}</td>
   <td>{{cpf}}</td>
   <td>{{dt_cadastro}}</td>
   <td>
-    <a class="btn btn-outline-primary btn-sm" href="{{URL}}/admin/inscritos/{{id}}/edit" role="button">Editar</a>
-
-    <a class="btn btn-outline-danger btn-sm" href="{{URL}}/admin/inscritos/{{id}}/delete" role="button">Excluir</a>
-
-    <a class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal-confirmacao" href="{{URL}}/admin/inscritos/visualizar/{{id}}">Visualizar</a>
+    <a href="{{URL}}/admin/inscritos/{{id}}/edit">
+      <i data-feather="edit" class="text-primary"></i>
+    </a>
+    <a class="ms-3" href="{{URL}}/admin/inscritos/{{id}}/delete">
+      <i data-feather="trash-2" class="text-danger"></i>
+    </a>
+    <a class="ms-3" data-id="{{id}}" data-bs-toggle="modal" data-bs-target="#modal-confirmacao" href="#">
+      <i data-feather="eye" class="text-warning"></i>
+    </a>
   </td>
 </tr>

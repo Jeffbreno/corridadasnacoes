@@ -14,7 +14,7 @@ $obRouter->get('/admin/inscritos', [
 ]);
 
 //ROTA DA LISTAGEM DE DEPOIMENTOS
-$obRouter->get('/admin/inscritos/visualizar/{{id}}', [
+$obRouter->get('/admin/inscritos/visualizar/{id}', [
     'middlewares' => [
         'required-admin-login'
     ],
