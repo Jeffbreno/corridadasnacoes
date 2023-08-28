@@ -19,18 +19,7 @@
       <form method="post" action="{{URL}}/cadastrar/inscricao">
         <p>Selecione sua categoria</p>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <label> <input type="radio" name="categoria" value="1" required /> Inscrições abertas ao público - 1º Lote Geral - R$ 89,90 + Taxas </label>
-          </li>
-          <li class="list-group-item">
-            <label> <input type="radio" name="categoria" value="2" required /> Portadores de Necessidades Especiais - R$ 44,95 (requer comprovação) + Taxas </label>
-          </li>
-          <li class="list-group-item">
-            <label> <input type="radio" name="categoria" value="3" required /> Doador de Sangue ou Idoso - R$ 44,95 (requer comprovação) + Taxas </label>
-          </li>
-          <li class="list-group-item">
-            <label> <input type="radio" name="categoria" value="4" required /> Kids - R$ 49,90 (até 12 anos) + Taxas</label>
-          </li>
+          {{categorias}}
         </ul>
         <div class="text-center mt-3">
           <div class="tilted-button-container">

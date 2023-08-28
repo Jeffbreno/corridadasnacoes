@@ -9,6 +9,7 @@ class Inscricao extends Model
     protected $table = 'usuarios_inscritos';
     protected $fillable = [
         'nome',
+        'nome_responsavel',
         'email',
         'genero',
         'cpf',

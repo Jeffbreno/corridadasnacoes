@@ -5,8 +5,10 @@
   <td>{{cpf}}</td>
   <td>{{dt_cadastro}}</td>
   <td>
-    <a class="btn btn-outline-primary btn-sm" href="{{URL}}/admin/users/{{id}}/edit" role="button">Editar</a>
+    <a class="btn btn-outline-primary btn-sm" href="{{URL}}/admin/inscritos/{{id}}/edit" role="button">Editar</a>
 
-    <a class="btn btn-outline-danger btn-sm" href="{{URL}}/admin/users/{{id}}/delete" role="button">Excluir</a>
+    <a class="btn btn-outline-danger btn-sm" href="{{URL}}/admin/inscritos/{{id}}/delete" role="button">Excluir</a>
+
+    <a class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal-confirmacao" href="{{URL}}/admin/inscritos/visualizar/{{id}}">Visualizar</a>
   </td>
 </tr>

@@ -13,6 +13,16 @@ $obRouter->get('/admin/inscritos', [
     }
 ]);
 
+//ROTA DA LISTAGEM DE DEPOIMENTOS
+$obRouter->get('/admin/inscritos/visualizar/{{id}}', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($id) {
+        return new Response(200, Admin\InscricoesController::getModal($id));
+    }
+]);
+
 //ROTA DE CADASTRO DE DEPOIMENTOS
 $obRouter->get('/admin/inscritos/new', [
     'middlewares' => [

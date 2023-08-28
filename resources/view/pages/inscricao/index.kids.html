@@ -6,9 +6,26 @@
       <form action="{{URL}}/enviar/inscricao" method="post" role="form" class="needs-validation" novalidate>
         <input type="hidden" name="categoria" value="{{categoria}}" />
         <div class="form-group">
-          <label for="nome">Nome Completo</label>
-          <input type="text" name="nome" class="form-control" id="nome" placeholder="Digite seu Nome Completo" required />
-          <div class="invalid-feedback">Campo obrigatorio.</div>
+          <label for="nome">Nome Completo do atleta Kid</label>
+          <input
+            type="text"
+            name="nome"
+            class="form-control"
+            id="nome"
+            placeholder="Digite o Nome Completo do atleta kid"
+            required />
+          <div class="invalid-feedback">Campo obrigatório.</div>
+        </div>
+        <div class="form-group mt-3">
+          <label for="nome">Nome Responsável do atleta Kid</label>
+          <input
+            type="text"
+            name="nome_responsavel"
+            class="form-control"
+            id="nome"
+            placeholder="Digite o Nome Completo do Responsável"
+            required />
+          <div class="invalid-feedback">Campo obrigatório.</div>
         </div>
         <div class="form-group mt-3">
           <label for="email">E-mail</label>
@@ -18,8 +35,15 @@
         <div class="row mt-3">
           <div class="form-group col-lg-3">
             <label for="cpf">CPF</label>
-            <input name="cpf" type="text" class="form-control" id="cpf" maxlength="14" placeholder="Digite seu CPF" required />
-            <div class="invalid-feedback">Campo obrigatorio.</div>
+            <input
+              name="cpf"
+              type="text"
+              class="form-control"
+              id="cpf"
+              maxlength="14"
+              placeholder="Digite seu CPF"
+              required />
+            <div class="invalid-feedback">Campo obrigatório.</div>
           </div>
           <div class="form-group col-lg-3">
             <label for="sexo">Gênero</label>
@@ -32,19 +56,19 @@
         </div>
         <div class="form-group mt-3 col-lg-3">
           <label for="data_nascimento">Data de Nascimento</label>
-          <input name="dt_nascimento" type="date" class="form-control" id="data_nascimento" required/>
-          <div class="invalid-feedback">Campo obrigatorio.</div>
+          <input name="dt_nascimento" type="date" class="form-control" id="data_nascimento" required />
+          <div class="invalid-feedback">Campo obrigatório.</div>
         </div>
         <div class="form-group col-lg-3 mt-3">
           <label for="celular">Celular</label>
-          <input name="celular" type="text" class="form-control" id="celular" placeholder="Celular" required/>
-          <div class="invalid-feedback">Campo obrigatorio.</div>
+          <input name="celular" type="text" class="form-control" id="celular" placeholder="Celular" required />
+          <div class="invalid-feedback">Campo obrigatório.</div>
         </div>
         <div class="row mt-3">
           <div class="form-group col-lg-10">
             <label for="logradouro">Logradouro</label>
-            <input name="logradouro" type="text" class="form-control" id="logradouro" placeholder="Logradouro" required/>
-            <div class="invalid-feedback">Campo obrigatorio.</div>
+            <input name="logradouro" type="text" class="form-control" id="logradouro" placeholder="Logradouro" required />
+            <div class="invalid-feedback">Campo obrigatório.</div>
           </div>
           <div class="form-group col-lg-2">
             <label for="numero">Número</label>
@@ -58,32 +82,36 @@
           </div>
           <div class="form-group col-lg-6">
             <label for="bairro">Bairro</label>
-            <input name="bairro" type="text" class="form-control" id="bairro" placeholder="Bairro" required/>
-            <div class="invalid-feedback">Campo obrigatorio.</div>
+            <input name="bairro" type="text" class="form-control" id="bairro" placeholder="Bairro" required />
+            <div class="invalid-feedback">Campo obrigatório.</div>
           </div>
         </div>
         <div class="row mt-3">
           <div class="form-group col-lg-6">
             <label for="cidade">Cidade</label>
-            <input name="cidade" type="text" class="form-control" id="cidade" placeholder="Cidade" required/>
-            <div class="invalid-feedback">Campo obrigatorio.</div>
+            <input name="cidade" type="text" class="form-control" id="cidade" placeholder="Cidade" required />
+            <div class="invalid-feedback">Campo obrigatório.</div>
           </div>
           <div class="form-group col-lg-2">
             <label for="uf">UF</label>
-            <input name="uf" type="text" class="form-control" id="uf" placeholder="UF" required/>
-            <div class="invalid-feedback">Campo obrigatorio.</div>
+            <input name="uf" type="text" class="form-control" id="uf" placeholder="UF" required />
+            <div class="invalid-feedback">Campo obrigatório.</div>
           </div>
         </div>
-    
+        <div class="form-group col-md-2 mt-3">
+          <label for="distancia">Distância</label>
+          <input type="text" class="form-control" name="distancia" value="200m" readonly />
+        </div>
+
         <div class="form-group col-md-2 mt-3">
           <label for="tamanhoCamisa">Camisa unissex tamanho:</label>
           <select name="camisa" class="form-select" id="tamanhoCamisa">
-            <option value="PP">PP (63cm X 43cm)</option>
-            <option value="P">P (65cm X 46cm)</option>
-            <option value="M">M (67cm X 50cm)</option>
-            <option value="G">G (69cm X 54cm)</option>
-            <option value="GG">GG (71cm X 57cm)</option>
-            <option value="XGG">XGG (75cm X 60cm)</option>
+            <option value="PP">PP (infantil)</option>
+            <option value="P">P (infantil)</option>
+            <option value="M">M (infantil)</option>
+            <option value="G">G (infantil)</option>
+            <option value="GG">GG (infantil)</option>
+            <option value="XGG">XGG (infantil)</option>
           </select>
         </div>
 
@@ -93,9 +121,10 @@
             type="text"
             class="form-control"
             name="equipe"
-            placeholder="Caso não tenha uma equipe, favor escrever 'não tenho equipe'" required/>
+            placeholder="Caso não tenha uma equipe, favor escrever 'não tenho equipe'"
+            required />
         </div>
-        <div class="invalid-feedback">Campo obrigatorio.</div>
+        <div class="invalid-feedback">Campo obrigatório.</div>
 
         <div class="text-center">
           <div class="tilted-button-container">

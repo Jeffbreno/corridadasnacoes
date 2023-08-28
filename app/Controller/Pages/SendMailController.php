@@ -3,6 +3,7 @@
 namespace App\Controller\Pages;
 
 use App\Http\Request;
+use App\Model\Entity\Categoria as EntityCategoria;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -34,25 +35,13 @@ class SendMailController
     {
 
         $nome = $destinatario['nome'];
+        $nome_responsavel = $destinatario['nome_responsavel'];
         $email = $destinatario['email'];
         $cpf = $destinatario['cpf'];
-        switch ($destinatario['categoria']) {
-            case 1:
-                $categoria = 'Público Geral';
-                break;
-            case 2:
-                $categoria = 'Portadores de Necessidades Especiais';
-                break;
-            case 3:
-                $categoria = 'Doador de Sangue';
-                break;
-            case 4:
-                $categoria = 'Kids';
-                break;
-            default:
-                $categoria = 'Público Geral';
-                break;
-        }
+
+        $obCategoria = EntityCategoria::find($destinatario['categoria']);
+        $categoria = $obCategoria->titulo;
+
         if ($destinatario['genero'] === 'M') {
             $genero = 'Masculino';
         } elseif ($destinatario['genero'] === 'F') {
@@ -93,6 +82,9 @@ class SendMailController
 
             $msg .= '<br />Link para pagamento: <br />' . $link;
             $msg .= "<br /><br />Nome e Sobrenome: " . $nome;
+            if ($destinatario['categoria'] == 3) {
+                $msg .= "<br />Nome e Responsável: " . $nome_responsavel;
+            }
             $msg .= "<br />E-mail: " . $email;
             $msg .= "<br />Sexo: $genero";
             $msg .= "<br />CPF: " . $cpf;
@@ -106,7 +98,11 @@ class SendMailController
             $msg .= "<br />Cidade: " . $cidade;
             $msg .= "<br />UF: " . $uf;
             $msg .= "<br />Distância: " . $distancia;
-            $msg .= "<br />Camisa unissex tamanho: " . $camisa;
+            if ($destinatario['categoria'] == 3) {
+                $msg .= "<br />Camisa unissex tamanho: " . $camisa . " Infantil";
+            } else {
+                $msg .= "<br />Camisa unissex tamanho: " . $camisa;
+            }
             $msg .= "<br />Equipe: " . $equipe;
 
             $this->mail->msgHTML($msg);

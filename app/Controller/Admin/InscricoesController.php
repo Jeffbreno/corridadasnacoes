@@ -59,6 +59,11 @@ class InscricoesController extends PageController
         return $resultItems;
     }
 
+    public static function getModal($id): string
+    {
+        return View::render('admin/inscritos/modal', ['nome' => $id]);
+    }
+
     /**
      * Método responsável por renderizar a view de home do painel
      *
@@ -68,7 +73,7 @@ class InscricoesController extends PageController
 
         #CONTEÚDO DA HOME DE DEPOIMENTOS
         $content = View::render('admin/inscritos/index', [
-            'botaolink' => URL.'/admin/inscritos/new',
+            'botaolink' => URL . '/admin/inscritos/new',
             'nomebotao' => 'Cadastrar novo inscrito',
             'descricao' => 'Lista de inscritos cadastrados no site',
             'itens' => self::getInscritoItems($request, $obPagination),

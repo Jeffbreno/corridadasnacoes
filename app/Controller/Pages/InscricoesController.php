@@ -5,6 +5,7 @@ namespace App\Controller\Pages;
 use App\Http\Request;
 use App\Utils\View;
 use App\Model\Entity\Inscricao as EntiyInscricao;
+use App\Model\Entity\Categoria as EntityCategoria;
 
 class InscricoesController extends PageController
 {
@@ -33,7 +34,7 @@ class InscricoesController extends PageController
 
     private static function getInscricao($categoria)
     {
-        if ($categoria == '4') {
+        if ($categoria == '3') {
             $content = View::render('pages/inscricao/index.kids', ['categoria' => $categoria]);
         } else {
             $content = View::render('pages/inscricao/index', ['categoria' => $categoria]);
@@ -43,7 +44,15 @@ class InscricoesController extends PageController
 
     private static function getSelectInscricao()
     {
-        return View::render('pages/inscricao/select-inscricao');
+        $obCategoria = EntityCategoria::all();
+        $categorias = '';
+
+        foreach ($obCategoria as $categoria) {
+            $categorias .= '<li class="list-group-item">
+            <label> <input type="radio" name="categoria" value="' . $categoria->id . '" required /> ' . $categoria->titulo . ' </label>
+          </li>';
+        }
+        return View::render('pages/inscricao/select-inscricao', ['categorias' => $categorias]);
     }
 
     public static function getHome(Request $request)
@@ -72,6 +81,8 @@ class InscricoesController extends PageController
         $obInscricao = new EntiyInscricao;
 
         $obInscricao->nome = $postVars['nome'];
+        //EM CASO DE RESPONSAVEL
+        $obInscricao->nome_responsavel = $postVars['nome_responsavel'] ?? NULL;
         $obInscricao->email = $postVars['email'];
         $obInscricao->cpf = $postVars['cpf'];
         $obInscricao->categoria = $postVars['categoria'];
@@ -84,11 +95,7 @@ class InscricoesController extends PageController
         $obInscricao->bairro = $postVars['bairro'];
         $obInscricao->cidade = $postVars['cidade'];
         $obInscricao->uf = $postVars['uf'];
-        if ($postVars['categoria'] == 4) {
-            $obInscricao->distancia = '0';
-        } else {
-            $obInscricao->distancia = $postVars['distancia'];
-        }
+        $obInscricao->distancia = $postVars['distancia'];
         $obInscricao->camisa = $postVars['camisa'];
         $obInscricao->equipe = $postVars['equipe'];
         $obInscricao->dt_cadastro = $data_cadastro;
@@ -106,23 +113,8 @@ class InscricoesController extends PageController
 
     public static function getBotao($categoria): string
     {
-        switch ($categoria) {
-            case 1:
-                return 'https://pag.ae/7ZHEeBbr4';
-                break;
-            case 2:
-                return  'https://pag.ae/7ZHEgG6hJ';
-                break;
-            case 3:
-                return  'https://pag.ae/7ZHEg5mcJ';
-                break;
-            case 4:
-                return 'https://pag.ae/7ZHEhePKo';
-                break;
-            default:
-                return 'https://pag.ae/7ZHEeBbr4';
-                break;
-        }
+        $obCategoria = EntityCategoria::find($categoria);
+        return $obCategoria->link_pagamento;
     }
 
     public static function getConfirmeInscricao(Request $request, $ticket = null): string
@@ -132,14 +124,23 @@ class InscricoesController extends PageController
         $nome = $postVars['nome'];
         $email = $postVars['email'];
 
-        #CONTEÚDO DA HOME DE DEPOIMENTOS
-        $content = View::render('pages/inscricao/confirmar', [
-            'ticket' => str_pad($ticket, 4, '0', STR_PAD_LEFT),
-            'nome' => $nome,
-            'email' => $email,
-            'botaoPagseguro' => self::getBotao($postVars['categoria']),
-            // 'status' => self::getStatus($request)
-        ]);
+        if ($postVars['categoria'] == 4) {
+            #CONTEÚDO
+            $content = View::render('pages/inscricao/confirmar.promocional', [
+                'ticket' => str_pad($ticket, 4, '0', STR_PAD_LEFT),
+                'nome' => $nome,
+                'email' => $email,
+                'botaoPagseguro' => self::getBotao($postVars['categoria'])
+            ]);
+        } else {
+            #CONTEÚDO
+            $content = View::render('pages/inscricao/confirmar', [
+                'ticket' => str_pad($ticket, 4, '0', STR_PAD_LEFT),
+                'nome' => $nome,
+                'email' => $email,
+                'botaoPagseguro' => self::getBotao($postVars['categoria'])
+            ]);
+        }
 
         return parent::getPageTelas('&raquo;Confirmar', $content);
     }
