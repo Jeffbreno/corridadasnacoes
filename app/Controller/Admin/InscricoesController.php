@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Http\Request;
 use App\Utils\View;
 use App\Model\Entity\Inscricao as EntityIncritos;
+use App\Model\Entity\Categoria as EntityCategoria;
 
 class InscricoesController extends PageController
 {
@@ -51,6 +52,7 @@ class InscricoesController extends PageController
                 'nome' => $inscrito->nome,
                 'email' => $inscrito->email,
                 'cpf' => $inscrito->cpf,
+                'status' => $inscrito->status_pag,
                 'dt_cadastro' => date('d/m/Y H:i', strtotime($inscrito->dt_cadastro))
             ]);
         }
@@ -62,6 +64,24 @@ class InscricoesController extends PageController
     public static function getModal($id): string
     {
         $obInscrito = EntityIncritos::find($id);
+        $obCategoria = EntityCategoria::find($obInscrito->categoria);
+        $obInscrito->categoria = $obCategoria->titulo;
+
+        if ($obInscrito->genero == 'M') {
+            $obInscrito->genero = 'MASCULINO';
+        } else {
+            $obInscrito->genero = 'FEMININO';
+        }
+
+        if ($obInscrito->status_pag == 'P') {
+            $obInscrito->status_pag = 'PAGA';
+        } else {
+            $obInscrito->status_pag = 'ABERTA';
+        }
+
+        $obInscrito->dt_nascimento = date('d/m/Y', strtotime($obInscrito->dt_nascimento));
+        $obInscrito->dt_cadastro = date('d/m/Y H:i', strtotime($obInscrito->dt_cadastro));
+
         return $obInscrito;
     }
 
@@ -95,13 +115,35 @@ class InscricoesController extends PageController
     {
         #CONTEÚDO DA HOME DE DEPOIMENTOS
         $content = View::render('admin/inscritos/form', [
-            'titulo' => 'Novo Inscrito',
             'nome' => null,
-            'mensagem' => null,
-            'status' => self::getStatus($request),
-            'script' => '<script src="' . $_ENV['URL'] . '/resources/assets/js/validate.js"></script>'
+            'nome_responsavel' => null,
+            'email' => null,
+            'genero' => '<option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+            <option value="O">Não informar</option>',
+            'cpf' => null,
+            'categoria' => null,
+            'dt_nascimento' => null,
+            'celular' => null,
+            'logradouro' => null,
+            'numero' => null,
+            'complemento' => null,
+            'bairro' => null,
+            'cidade' => null,
+            'uf' => null,
+            'distancia' => null,
+            'camisa' =>
+            '<option value="PP">PP (63cm X 43cm)</option>
+            <option value="P">P (65cm X 46cm)</option>
+            <option value="M">M (67cm X 50cm)</option>
+            <option value="G">G (69cm X 54cm)</option>
+            <option value="GG">GG (71cm X 57cm)</option>
+            <option value="XGG">XGG (75cm X 60cm)</option>',
+            'equipe' => null,
+            'status_pag' => null,
+            'status' => self::getStatus($request)
         ]);
-        return parent::getPainel('Cadastro de novo inscrito', $content, 'Inscrito');
+        return parent::getPainel('Cadastrar Novo Inscrito', $content, 'inscritos');
     }
 
     public static function setNewInscrito($request): string
@@ -115,7 +157,7 @@ class InscricoesController extends PageController
 
         $obInscrito->save();
 
-        return $request->getRouter()->redirect('/admin/Inscrito/' . $obInscrito->id . '/edit?status=created');
+        return $request->getRouter()->redirect('/admin/inscritos/' . $obInscrito->id . '/edit?status=created');
     }
 
 
@@ -125,21 +167,63 @@ class InscricoesController extends PageController
      */
     public static function getEditInscrito(Request $request, int $id): string
     {
-        $obInscrito = EntityIncritos::getById($id);
+        $obInscrito = EntityIncritos::join(
+            'categorias',
+            'categorias.id',
+            '=',
+            'usuarios_inscritos.categoria'
+        )->where('usuarios_inscritos.id', $id)
+            ->select(['categorias.titulo', 'usuarios_inscritos.*'])
+            ->first();
 
         if (!$obInscrito instanceof EntityIncritos) {
-            $request->getRouter()->redirect('/admin/Inscrito');
+            $request->getRouter()->redirect('/admin/inscritos');
+        }
+
+        $genero = '
+        <option ' . ($obInscrito->genero === "M" ? "selected" : "") . ' value="M">Masculino</option>
+        <option ' . ($obInscrito->genero === "F" ? "selected" : "") . ' value="F">Feminino</option>
+        <option ' . ($obInscrito->genero === "O" ? "selected" : "") . ' value="O">Não informar</option>
+        ';
+
+        $camisa = '
+            <option ' . ($obInscrito->canisa === "PP" ? "selected" : "") . ' value="PP">PP (63cm X 43cm)</option>
+            <option ' . ($obInscrito->canisa === "P" ? "selected" : "") . ' value="P">P (65cm X 46cm)</option>
+            <option ' . ($obInscrito->canisa === "M" ? "selected" : "") . ' value="M">M (67cm X 50cm)</option>
+            <option ' . ($obInscrito->canisa === "G" ? "selected" : "") . ' value="G">G (69cm X 54cm)</option>
+            <option ' . ($obInscrito->canisa === "GG" ? "selected" : "") . ' value="GG">GG (71cm X 57cm)</option>
+            <option ' . ($obInscrito->canisa === "XGG" ? "selected" : "") . ' value="XGG">XGG (75cm X 60cm)</option>
+        ';
+
+        $queryCategorias = EntityCategoria::orderBy('titulo', 'asc')->get();
+        $categoria = '';
+        foreach ($queryCategorias as $categorias) {
+            $categoria .= '<option ' . ($obInscrito->categoria === $categorias->id ? "selected" : "") . ' value="' . $categorias->id . '">' . $categorias->titulo . '</option>';
         }
 
         #CONTEÚDO DA HOME DE DEPOIMENTOS
-        $content = View::render('admin/Inscrito/form', [
-            'titulo' => 'Cadastrar depoimento',
+        $content = View::render('admin/inscritos/form', [
             'nome' => $obInscrito->nome,
-            'mensagem' => $obInscrito->mensagem,
-            'status' => self::getStatus($request),
-            'script' => '<script src="' . $_ENV['URL'] . '/resources/assets/js/validate.js"></script>'
+            'nome_responsavel' => $obInscrito->nome_responsavel,
+            'email' => $obInscrito->email,
+            'genero' => $genero,
+            'cpf' => $obInscrito->cpf,
+            'categoria' => $categoria,
+            'dt_nascimento' => null,
+            'celular' => null,
+            'logradouro' => null,
+            'numero' => null,
+            'complemento' => null,
+            'bairro' => null,
+            'cidade' => null,
+            'uf' => null,
+            'distancia' => null,
+            'camisa' => $camisa,
+            'equipe' => null,
+            'status_pag' => null,
+            'status' => self::getStatus($request)
         ]);
-        return parent::getPainel('Editar depoimento', $content, 'Inscrito');
+        return parent::getPainel('Editar inscrição', $content, 'inscritos');
     }
 
     public static function setEditInscrito(Request $request, int $id)
@@ -180,7 +264,7 @@ class InscricoesController extends PageController
             'mensagem' => $obInscrito->mensagem,
             'status' => self::getStatus($request)
         ]);
-        return parent::getPainel('Excluir registro', $content, 'Inscrito');
+        return parent::getPainel('Excluir registro', $content, 'inscritos');
     }
 
     /**

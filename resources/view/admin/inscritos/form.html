@@ -1,26 +1,104 @@
 {{status}}
-<form method="post">
-
-  <div class="mb-3">
-    <label for="" class="form-label">Nome</label>
-    <input type="text" name="nome" class="form-control" placeholder="Digite o nome" value="{{nome}}" required>
+<form method="post" role="form" class="needs-validation" novalidate>
+  <div class="form-group">
+    <label for="nome">Nome Completo</label>
+    <input type="text" name="nome" class="form-control" id="nome" placeholder="Digite seu Nome Completo" required />
+    <div class="invalid-feedback">Campo obrigatorio.</div>
+  </div>
+  <div class="form-group mt-3">
+    <label for="email">E-mail</label>
+    <input type="email" class="form-control" name="email" id="email" placeholder="nome@exemplo.com" required />
+    <div class="invalid-feedback">Por favor, insira um email válido.</div>
+  </div>
+  <div class="row mt-3">
+    <div class="form-group col-lg-3">
+      <label for="cpf">CPF</label>
+      <input name="cpf" type="text" class="form-control" id="cpf" maxlength="14" placeholder="Digite seu CPF" required />
+      <div class="invalid-feedback">Campo obrigatorio.</div>
+    </div>
+    <div class="form-group col-lg-3">
+      <label for="sexo">Gênero</label>
+      <select name="genero" id="sexo" class="form-select">
+        {{genero}}
+      </select>
+    </div>
+  </div>
+  <div class="form-group col-md-6 mt-3">
+    <label for="tamanhoCamisa">Categoria da inscrição:</label>
+    <select name="categoria" class="form-select" id="categoria">
+      {{categoria}}
+    </select>
+  </div>
+  <div class="form-group mt-3 col-lg-3">
+    <label for="data_nascimento">Data de Nascimento</label>
+    <input name="dt_nascimento" type="date" class="form-control" id="data_nascimento" required />
+    <div class="invalid-feedback">Campo obrigatorio.</div>
+  </div>
+  <div class="form-group col-lg-3 mt-3">
+    <label for="celular">Celular</label>
+    <input name="celular" type="text" class="form-control" id="celular" placeholder="Celular" required />
+    <div class="invalid-feedback">Campo obrigatorio.</div>
+  </div>
+  <div class="row mt-3">
+    <div class="form-group col-lg-10">
+      <label for="logradouro">Logradouro</label>
+      <input name="logradouro" type="text" class="form-control" id="logradouro" placeholder="Logradouro" required />
+      <div class="invalid-feedback">Campo obrigatorio.</div>
+    </div>
+    <div class="form-group col-lg-2">
+      <label for="numero">Número</label>
+      <input name="numero" type="text" class="form-control" id="numero" placeholder="Número" />
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="form-group col-lg-6">
+      <label for="complemento">Complemento</label>
+      <input name="complemento" type="text" class="form-control" id="complemento" placeholder="Complemento" />
+    </div>
+    <div class="form-group col-lg-6">
+      <label for="bairro">Bairro</label>
+      <input name="bairro" type="text" class="form-control" id="bairro" placeholder="Bairro" required />
+      <div class="invalid-feedback">Campo obrigatorio.</div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="form-group col-lg-6">
+      <label for="cidade">Cidade</label>
+      <input name="cidade" type="text" class="form-control" id="cidade" placeholder="Cidade" required />
+      <div class="invalid-feedback">Campo obrigatorio.</div>
+    </div>
+    <div class="form-group col-lg-2">
+      <label for="uf">UF</label>
+      <input name="uf" type="text" class="form-control" id="uf" placeholder="UF" required />
+      <div class="invalid-feedback">Campo obrigatorio.</div>
+    </div>
   </div>
 
-  <div class="mb-3">
-    <label for="" class="form-label">Login</label>
-    <input type="text" name="login" class="form-control" placeholder="Digite o usuário " value="{{login}}" required>
+  <div class="form-group col-md-2 mt-3">
+    <label for="distancia">Distância</label>
+    <select name="distancia" class="form-select">
+      <option value="5km">5 km</option>
+      <option value="10km">10 km</option>
+    </select>
   </div>
 
-  <div class="mb-3">
-    <label for="" class="form-label">E-mail</label>
-    <input type="email" name="email" class="form-control" placeholder="email@dominio.com " value="{{email}}" required>
+  <div class="form-group col-md-3 mt-3">
+    <label for="tamanhoCamisa">Camisa unissex tamanho:</label>
+    <select name="camisa" class="form-select" id="tamanhoCamisa">
+      {{camisa}}
+    </select>
   </div>
 
-  <div class="mb-3">
-    <label for="" class="form-label">Senha</label>
-    <input type="password" name="senha" class="form-control" placeholder="*********">
+  <div class="form-group mt-3 mb-5">
+    <label for="equipe">Equipe</label>
+    <input type="text" class="form-control" name="equipe" placeholder="Caso não tenha uma equipe, favor escrever 'não tenho equipe'" required />
   </div>
+  <div class="invalid-feedback">Campo obrigatorio.</div>
 
   <button type="submit" class="btn btn-success">Enviar</button>
-  <a class="btn btn-warning" href="{{URL}}/admin/users" role="button">Cancelar</a>
+  <a class="btn btn-warning" href="{{URL}}/admin/inscritos" role="button">Cancelar</a>
 </form>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script type="text/javascript" src="{{URL}}/resources/assets/js/validate.js"></script>
