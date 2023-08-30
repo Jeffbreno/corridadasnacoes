@@ -181,18 +181,25 @@ class InscricoesController extends PageController
         }
 
         $genero = '
-        <option ' . ($obInscrito->genero === "M" ? "selected" : "") . ' value="M">Masculino</option>
-        <option ' . ($obInscrito->genero === "F" ? "selected" : "") . ' value="F">Feminino</option>
-        <option ' . ($obInscrito->genero === "O" ? "selected" : "") . ' value="O">Não informar</option>
+            <option ' . ($obInscrito->genero === "M" ? "selected" : "") . ' value="M">Masculino</option>
+            <option ' . ($obInscrito->genero === "F" ? "selected" : "") . ' value="F">Feminino</option>
+            <option ' . ($obInscrito->genero === "O" ? "selected" : "") . ' value="O">Não informar</option>
         ';
 
         $camisa = '
-            <option ' . ($obInscrito->canisa === "PP" ? "selected" : "") . ' value="PP">PP (63cm X 43cm)</option>
-            <option ' . ($obInscrito->canisa === "P" ? "selected" : "") . ' value="P">P (65cm X 46cm)</option>
-            <option ' . ($obInscrito->canisa === "M" ? "selected" : "") . ' value="M">M (67cm X 50cm)</option>
-            <option ' . ($obInscrito->canisa === "G" ? "selected" : "") . ' value="G">G (69cm X 54cm)</option>
-            <option ' . ($obInscrito->canisa === "GG" ? "selected" : "") . ' value="GG">GG (71cm X 57cm)</option>
-            <option ' . ($obInscrito->canisa === "XGG" ? "selected" : "") . ' value="XGG">XGG (75cm X 60cm)</option>
+            <option ' . ($obInscrito->camisa === "PP" ? "selected" : "") . ' value="PP">PP (63cm X 43cm)</option>
+            <option ' . ($obInscrito->camisa === "P" ? "selected" : "") . ' value="P">P (65cm X 46cm)</option>
+            <option ' . ($obInscrito->camisa === "M" ? "selected" : "") . ' value="M">M (67cm X 50cm)</option>
+            <option ' . ($obInscrito->camisa === "G" ? "selected" : "") . ' value="G">G (69cm X 54cm)</option>
+            <option ' . ($obInscrito->camisa === "GG" ? "selected" : "") . ' value="GG">GG (71cm X 57cm)</option>
+            <option ' . ($obInscrito->camisa === "XGG" ? "selected" : "") . ' value="XGG">XGG (75cm X 60cm)</option>
+        ';
+
+
+        $distancia = '
+            <option ' . ($obInscrito->distancia === "5km" ? "selected" : "") . ' value="5km">5 km</option>
+            <option ' . ($obInscrito->distancia === "10km" ? "selected" : "") . ' value="10km">10 km</option>
+            <option ' . ($obInscrito->distanciad === "200m" ? "selected" : "") . ' value="200m">200 m (kids)</option>
         ';
 
         $queryCategorias = EntityCategoria::orderBy('titulo', 'asc')->get();
@@ -209,18 +216,18 @@ class InscricoesController extends PageController
             'genero' => $genero,
             'cpf' => $obInscrito->cpf,
             'categoria' => $categoria,
-            'dt_nascimento' => null,
-            'celular' => null,
-            'logradouro' => null,
-            'numero' => null,
-            'complemento' => null,
-            'bairro' => null,
-            'cidade' => null,
-            'uf' => null,
-            'distancia' => null,
+            'dt_nascimento' => $obInscrito->dt_nascimento,
+            'celular' => $obInscrito->celular,
+            'logradouro' => $obInscrito->logradouro,
+            'numero' => $obInscrito->numero,
+            'complemento' => $obInscrito->complemento,
+            'bairro' => $obInscrito->bairro,
+            'cidade' => $obInscrito->cidade,
+            'uf' => $obInscrito->uf,
+            'distancia' => $distancia,
             'camisa' => $camisa,
-            'equipe' => null,
-            'status_pag' => null,
+            'equipe' => $obInscrito->equipe,
+            'status_pag' => $obInscrito->status_pag,
             'status' => self::getStatus($request)
         ]);
         return parent::getPainel('Editar inscrição', $content, 'inscritos');
@@ -228,7 +235,13 @@ class InscricoesController extends PageController
 
     public static function setEditInscrito(Request $request, int $id)
     {
-        $obInscrito = EntityIncritos::getById($id);
+        $obInscrito = EntityIncritos::find($id);
+
+
+        echo '<pre>';
+        echo print_r($obInscrito);
+        echo '</pre>';
+        exit;
 
         if (!$obInscrito instanceof EntityIncritos) {
             $request->getRouter()->redirect('/admin/Inscrito');
@@ -239,7 +252,7 @@ class InscricoesController extends PageController
 
         #ATUALIZA A INSTANCIA
         $obInscrito->nome = $postVars['nome'];
-        $obInscrito->mensagem = $postVars['mensagem'];
+        
         $obInscrito->update();
 
         return $request->getRouter()->redirect('/admin/inscritos/' . $obInscrito->id . '/edit?status=update');
