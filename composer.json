@@ -11,7 +11,6 @@
     "illuminate/pagination": "^10.13",
     "firebase/php-jwt": "^6.8",
     "phpmailer/phpmailer": "^6.8",
-    "setasign/fpdf": "^1.8",
-    "pagseguro/pagseguro-php-sdk" : "^4.2"
+    "setasign/fpdf": "^1.8"
   }
 }

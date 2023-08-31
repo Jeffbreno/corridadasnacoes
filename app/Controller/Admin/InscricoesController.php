@@ -23,11 +23,13 @@ class InscricoesController extends PageController
         #MENSAGEM DE STATUS
         switch ($queryParams['status']) {
             case 'created':
-                return AlertController::getSuccess('Depoimento criado com sucesso!');
+                return AlertController::getSuccess('Criado com sucesso!');
             case 'update':
-                return AlertController::getSuccess('Depoimento atualizado com sucesso!');
+                return AlertController::getSuccess('Atualizado com sucesso!');
             case 'deleted':
-                return AlertController::getSuccess('Depoimento excluído com sucesso!');
+                return AlertController::getSuccess('Excluído com sucesso!');
+            case 'error':
+                return AlertController::getError('ERRO ao tentar atualizar dados!');
         }
     }
 
@@ -237,12 +239,6 @@ class InscricoesController extends PageController
     {
         $obInscrito = EntityIncritos::find($id);
 
-
-        echo '<pre>';
-        echo print_r($obInscrito);
-        echo '</pre>';
-        exit;
-
         if (!$obInscrito instanceof EntityIncritos) {
             $request->getRouter()->redirect('/admin/Inscrito');
         }
@@ -250,12 +246,18 @@ class InscricoesController extends PageController
         #POST VARS
         $postVars = $request->getPostVars();
 
-        #ATUALIZA A INSTANCIA
-        $obInscrito->nome = $postVars['nome'];
-        
-        $obInscrito->update();
+        //LAÇO PARA INCREMENTAR TODAS AS KEY, PRECISANDO SER IGUAL COM O QUE ESTA EM BANCO
+        foreach ($postVars as $key => $value) {
+            $obInscrito->$key = $value;
+        }
 
-        return $request->getRouter()->redirect('/admin/inscritos/' . $obInscrito->id . '/edit?status=update');
+        //ATUALIZAR DADOS
+        try {
+            $obInscrito->update();
+            return $request->getRouter()->redirect('/admin/inscritos/' . $id . '/edit?status=update');
+        } catch (\Exception $e) {
+            return $request->getRouter()->redirect('/admin/inscritos/' . $id . '/edit?status=error');
+        }
     }
 
     /**
