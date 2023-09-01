@@ -4,7 +4,14 @@
   <td>{{email}}</td>
   <td>{{cpf}}</td>
   <td>{{dt_cadastro}}</td>
-  <td>{{status}}</td>
+  <td>
+    <div class="row">
+      <a style="--bs-btn-padding-y: 0.25rem; --bs-btn-padding-x: 0.5rem; --bs-btn-font-size: 0.75rem" class="btn btn-danger text-whity" href="{{URL}}/admin/inscritos/{{id}}/status">
+        {{status}}
+        <i data-feather="dollar-sign"></i>
+      </a>
+    </div>
+  </td>
   <td>
     <a href="{{URL}}/admin/inscritos/{{id}}/edit">
       <i data-feather="edit" class="text-primary"></i>

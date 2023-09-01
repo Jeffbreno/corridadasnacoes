@@ -54,7 +54,7 @@ class InscricoesController extends PageController
                 'nome' => $inscrito->nome,
                 'email' => $inscrito->email,
                 'cpf' => $inscrito->cpf,
-                'status' => $inscrito->status_pag,
+                'status' => $inscrito->status_pag === 'P' ? 'Pago' : 'Aberto',
                 'dt_cadastro' => date('d/m/Y H:i', strtotime($inscrito->dt_cadastro))
             ]);
         }
@@ -65,9 +65,20 @@ class InscricoesController extends PageController
 
     public static function getModal($id): string
     {
-        $obInscrito = EntityIncritos::find($id);
-        $obCategoria = EntityCategoria::find($obInscrito->categoria);
-        $obInscrito->categoria = $obCategoria->titulo;
+        // $obInscrito = EntityIncritos::find($id);
+        // $obCategoria = EntityCategoria::find($obInscrito->categoria);
+
+        $obInscrito = EntityIncritos::join(
+            'categorias',
+            'categorias.id',
+            '=',
+            'usuarios_inscritos.categoria'
+        )->where('usuarios_inscritos.id', $id)
+            ->select(['categorias.titulo', 'usuarios_inscritos.*'])
+            ->first();
+
+
+        
 
         if ($obInscrito->genero == 'M') {
             $obInscrito->genero = 'MASCULINO';
@@ -115,16 +126,42 @@ class InscricoesController extends PageController
      */
     public static function getNewInscrito(Request $request): string
     {
+
+        $genero = '
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+            <option value="O">Não informar</option>
+        ';
+
+        $camisa = '
+            <option value="PP">PP (63cm X 43cm)</option>
+            <option value="P">P (65cm X 46cm)</option>
+            <option value="M">M (67cm X 50cm)</option>
+            <option value="G">G (69cm X 54cm)</option>
+            <option value="GG">GG (71cm X 57cm)</option>
+            <option value="XGG">XGG (75cm X 60cm)</option>
+        ';
+
+        $distancia = '
+            <option value="5km">5 km</option>
+            <option value="10km">10 km</option>
+            <option value="200m">200 m (kids)</option>
+        ';
+
+        $queryCategorias = EntityCategoria::orderBy('titulo', 'asc')->get();
+        $categoria = '';
+        foreach ($queryCategorias as $categorias) {
+            $categoria .= '<option value="' . $categorias->id . '">' . $categorias->titulo . '</option>';
+        }
+
         #CONTEÚDO DA HOME DE DEPOIMENTOS
         $content = View::render('admin/inscritos/form', [
             'nome' => null,
             'nome_responsavel' => null,
             'email' => null,
-            'genero' => '<option value="M">Masculino</option>
-            <option value="F">Feminino</option>
-            <option value="O">Não informar</option>',
+            'genero' => $genero,
             'cpf' => null,
-            'categoria' => null,
+            'categoria' => $categoria,
             'dt_nascimento' => null,
             'celular' => null,
             'logradouro' => null,
@@ -133,16 +170,9 @@ class InscricoesController extends PageController
             'bairro' => null,
             'cidade' => null,
             'uf' => null,
-            'distancia' => null,
-            'camisa' =>
-            '<option value="PP">PP (63cm X 43cm)</option>
-            <option value="P">P (65cm X 46cm)</option>
-            <option value="M">M (67cm X 50cm)</option>
-            <option value="G">G (69cm X 54cm)</option>
-            <option value="GG">GG (71cm X 57cm)</option>
-            <option value="XGG">XGG (75cm X 60cm)</option>',
+            'distancia' => $distancia,
+            'camisa' => $camisa,
             'equipe' => null,
-            'status_pag' => null,
             'status' => self::getStatus($request)
         ]);
         return parent::getPainel('Cadastrar Novo Inscrito', $content, 'inscritos');
@@ -153,15 +183,27 @@ class InscricoesController extends PageController
         //DADOS DO POST
         $postVars = $request->getPostVars();
         $obInscrito = new EntityIncritos;
-        $obInscrito->nome = $postVars['nome'];
-        $obInscrito->mensagem = $postVars['mensagem'];
-        $obInscrito->data = date('Y-m-d H:i:s');
 
-        $obInscrito->save();
+        if (!$obInscrito instanceof EntityIncritos) {
+            $request->getRouter()->redirect('/admin/inscritos');
+        }
 
-        return $request->getRouter()->redirect('/admin/inscritos/' . $obInscrito->id . '/edit?status=created');
+        #POST VARS
+        $postVars = $request->getPostVars();
+
+        //LAÇO PARA INCREMENTAR TODAS AS KEY, PRECISANDO SER IGUAL COM O QUE ESTA EM BANCO
+        foreach ($postVars as $key => $value) {
+            $obInscrito->$key = $value;
+        }
+
+        //CADASTRAR DADOS
+        try {
+            $obInscrito->save();
+            return $request->getRouter()->redirect('/admin/inscritos/' . $obInscrito->id . '/edit?status=update');
+        } catch (\Exception $e) {
+            return $request->getRouter()->redirect('/admin/inscritos/' . $obInscrito->id . '/edit?status=error');
+        }
     }
-
 
     /**
      * Método responsável por retornar o fomulário de edição de um depoimento

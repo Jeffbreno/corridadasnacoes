@@ -31,7 +31,7 @@
           data.cpf +
           '</span></li>\
               <li><strong>Categoria:</strong> <span id="categoria">' +
-          data.categoria +
+          data.titulo +
           '</span></li>\
               <li><strong>Data de Nascimento:</strong> <span id="dt_nascimento">' +
           data.dt_nascimento +
