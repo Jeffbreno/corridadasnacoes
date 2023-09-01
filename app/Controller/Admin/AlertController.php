@@ -13,7 +13,7 @@ class AlertController
      */
     public static function getSuccess($message): string
     {
-        return View::render('admin/alert/modal', [
+        return View::render('admin/alert/status', [
             'tipo' => 'success',
             'message' => $message
         ]);
