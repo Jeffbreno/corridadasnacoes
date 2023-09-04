@@ -83,3 +83,13 @@ $obRouter->post('/admin/inscritos/{id}/delete', [
         return new Response(200, Admin\InscricoesController::setDeleteInscrito($request, $id));
     }
 ]);
+
+//ROTA DE EXCLUSÃO DE DEPOIMENTOS
+$obRouter->get('/admin/inscritos/{id}/pagamento', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request, $id) {
+        return new Response(200, Admin\InscricoesController::setStatusPag($request, $id));
+    }
+]);

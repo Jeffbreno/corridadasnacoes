@@ -6,8 +6,11 @@
   <td>{{dt_cadastro}}</td>
   <td>
     <div class="row">
-      <a style="--bs-btn-padding-y: 0.25rem; --bs-btn-padding-x: 0.5rem; --bs-btn-font-size: 0.75rem" class="btn btn-danger text-whity" href="{{URL}}/admin/inscritos/{{id}}/status">
-        {{status}}
+      <a
+        style="--bs-btn-padding-y: 0.25rem; --bs-btn-padding-x: 0.5rem; --bs-btn-font-size: 0.75rem"
+        class="btn btn-{{status_pag_cor}} text-whity"
+        href="{{URL}}/admin/inscritos/{{id}}/pagamento?status={{status_pag}}">
+        {{status_desc}}
         <i data-feather="dollar-sign"></i>
       </a>
     </div>
