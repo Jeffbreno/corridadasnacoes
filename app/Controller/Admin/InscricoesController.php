@@ -363,6 +363,9 @@ class InscricoesController extends PageController
 
         #QUERY PARAMS
         $queryParams = $request->getQueryParams();
+
+        print_r($request->getRouter()->getCurrentUrl());
+        exit;
         $currentPage = $queryParams['page'] ?? 1;
         $statusPagamento = ($queryParams['status'] === 'P' ? 'A' : 'P');
         $obInscrito->status_pag = $statusPagamento;
@@ -370,9 +373,9 @@ class InscricoesController extends PageController
         //ATUALIZAR DADOS
         try {
             $obInscrito->update();
-            return $request->getRouter()->redirect('/admin/inscritos?status=update?pag=' . $currentPage);
+            return $request->getRouter()->redirect('/admin/inscritos?status=update&page=' . $currentPage);
         } catch (\Exception $e) {
-            return $request->getRouter()->redirect('/admin/inscritos?status=error?pag=' . $currentPage);
+            return $request->getRouter()->redirect('/admin/inscritos?status=error&page=' . $currentPage);
         }
     }
 }
