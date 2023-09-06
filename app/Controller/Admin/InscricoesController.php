@@ -46,7 +46,7 @@ class InscricoesController extends PageController
         $queryInscritos = EntityIncritos::orderBy('id', 'desc')->get();
 
         //Seta e Retorna intens por página
-        $obPagination = PageController::setPaginator($request, $queryInscritos, 5);
+        $obPagination = PageController::setPaginator($request, $queryInscritos, 10);
 
         foreach ($obPagination as $inscrito) {
             $resultItems .= View::render('admin/inscritos/item', [
@@ -54,7 +54,9 @@ class InscricoesController extends PageController
                 'nome' => $inscrito->nome,
                 'email' => $inscrito->email,
                 'cpf' => $inscrito->cpf,
-                'status' => $inscrito->status_pag === 'P' ? 'Pago' : 'Aberto',
+                'status_desc' => $inscrito->status_pag === 'P' ? 'Pago' : 'Aberto',
+                'status_pag' =>  $inscrito->status_pag,
+                'status_pag_cor' => $inscrito->status_pag === 'P' ? 'success' : 'danger',
                 'dt_cadastro' => date('d/m/Y H:i', strtotime($inscrito->dt_cadastro))
             ]);
         }
@@ -65,9 +67,6 @@ class InscricoesController extends PageController
 
     public static function getModal($id): string
     {
-        // $obInscrito = EntityIncritos::find($id);
-        // $obCategoria = EntityCategoria::find($obInscrito->categoria);
-
         $obInscrito = EntityIncritos::join(
             'categorias',
             'categorias.id',
@@ -77,8 +76,6 @@ class InscricoesController extends PageController
             ->select(['categorias.titulo', 'usuarios_inscritos.*'])
             ->first();
 
-
-        
 
         if ($obInscrito->genero == 'M') {
             $obInscrito->genero = 'MASCULINO';
@@ -282,7 +279,7 @@ class InscricoesController extends PageController
         $obInscrito = EntityIncritos::find($id);
 
         if (!$obInscrito instanceof EntityIncritos) {
-            $request->getRouter()->redirect('/admin/Inscrito');
+            $request->getRouter()->redirect('/admin/inscritos');
         }
 
         #POST VARS
@@ -308,7 +305,7 @@ class InscricoesController extends PageController
      */
     public static function getDeleteInscrito(Request $request, int $id): string
     {
-        $obInscrito = EntityIncritos::getById($id);
+        $obInscrito = EntityIncritos::find($id);
 
         if (!$obInscrito instanceof EntityIncritos) {
             $request->getRouter()->redirect('/admin/inscritos');
@@ -316,9 +313,9 @@ class InscricoesController extends PageController
 
         #CONTEÚDO DA HOME DE DEPOIMENTOS
         $content = View::render('admin/inscritos/delete', [
-            'title' => 'Excluir depoimento',
+            'title' => 'Excluir Registro',
             'nome' => $obInscrito->nome,
-            'mensagem' => $obInscrito->mensagem,
+            'email' => $obInscrito->email,
             'status' => self::getStatus($request)
         ]);
         return parent::getPainel('Excluir registro', $content, 'inscritos');
@@ -330,15 +327,52 @@ class InscricoesController extends PageController
      */
     public static function setDeleteInscrito(Request $request, int $id)
     {
-        $obInscrito = EntityIncritos::getById($id);
+        $obInscrito = EntityIncritos::find($id);
 
         if (!$obInscrito instanceof EntityIncritos) {
             $request->getRouter()->redirect('/admin/inscritos');
         }
 
+        #QUERY PARAMS
+        $queryParams = $request->getQueryParams();
+        $currentPage = $queryParams['page'] ?? 1;
+
         #EXCLUI O REGISTRO
         $obInscrito->delete();
 
-        return $request->getRouter()->redirect('/admin/inscritos?status=deleted');
+        //ATUALIZAR DADOS
+        try {
+            $obInscrito->delete();
+            return $request->getRouter()->redirect('/admin/inscritos?status=update?pag=' . $currentPage);
+        } catch (\Exception $e) {
+            return $request->getRouter()->redirect('/admin/inscritos?status=error?pag=' . $currentPage);
+        }
+    }
+
+    /**
+     * Método responsavel por excluir um depoimento
+     * @return void
+     */
+    public static function setStatusPag(Request $request, int $id)
+    {
+        $obInscrito = EntityIncritos::find($id);
+
+        if (!$obInscrito instanceof EntityIncritos) {
+            $request->getRouter()->redirect('/admin/inscritos');
+        }
+
+        #QUERY PARAMS
+        $queryParams = $request->getQueryParams();
+        $currentPage = $queryParams['page'] ?? 1;
+        $statusPagamento = ($queryParams['status'] === 'P' ? 'A' : 'P');
+        $obInscrito->status_pag = $statusPagamento;
+
+        //ATUALIZAR DADOS
+        try {
+            $obInscrito->update();
+            return $request->getRouter()->redirect('/admin/inscritos?status=update?pag=' . $currentPage);
+        } catch (\Exception $e) {
+            return $request->getRouter()->redirect('/admin/inscritos?status=error?pag=' . $currentPage);
+        }
     }
 }
