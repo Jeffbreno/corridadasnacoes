@@ -364,7 +364,7 @@ class InscricoesController extends PageController
         #QUERY PARAMS
         $queryParams = $request->getQueryParams();
 
-        print_r($request->getRouter()->getCurrentUrl());
+        print_r($queryParams);
         exit;
         $currentPage = $queryParams['page'] ?? 1;
         $statusPagamento = ($queryParams['status'] === 'P' ? 'A' : 'P');
