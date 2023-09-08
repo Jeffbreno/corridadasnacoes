@@ -57,7 +57,8 @@ class InscricoesController extends PageController
                 'status_desc' => $inscrito->status_pag === 'P' ? 'Pago' : 'Aberto',
                 'status_pag' =>  $inscrito->status_pag,
                 'status_pag_cor' => $inscrito->status_pag === 'P' ? 'success' : 'danger',
-                'dt_cadastro' => date('d/m/Y H:i', strtotime($inscrito->dt_cadastro))
+                'dt_cadastro' => date('d/m/Y H:i', strtotime($inscrito->dt_cadastro)),
+                'currentPage' => $obPagination->currentPage()
             ]);
         }
 
@@ -101,7 +102,6 @@ class InscricoesController extends PageController
      */
     public static function getInscrito(Request $request): string
     {
-
         #CONTEÚDO DA HOME DE DEPOIMENTOS
         $content = View::render('admin/inscritos/index', [
             'botaolink' => URL . '/admin/inscritos/new',
@@ -343,9 +343,9 @@ class InscricoesController extends PageController
         //ATUALIZAR DADOS
         try {
             $obInscrito->delete();
-            return $request->getRouter()->redirect('/admin/inscritos?status=update?pag=' . $currentPage);
+            return $request->getRouter()->redirect('/admin/inscritos?status=update&page=' . $currentPage);
         } catch (\Exception $e) {
-            return $request->getRouter()->redirect('/admin/inscritos?status=error?pag=' . $currentPage);
+            return $request->getRouter()->redirect('/admin/inscritos?status=error&page=' . $currentPage);
         }
     }
 
@@ -364,8 +364,6 @@ class InscricoesController extends PageController
         #QUERY PARAMS
         $queryParams = $request->getQueryParams();
 
-        print_r($request->getRouter()->getCurrentUrl());
-        exit;
         $currentPage = $queryParams['page'] ?? 1;
         $statusPagamento = ($queryParams['status'] === 'P' ? 'A' : 'P');
         $obInscrito->status_pag = $statusPagamento;
