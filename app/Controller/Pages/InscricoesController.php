@@ -44,7 +44,7 @@ class InscricoesController extends PageController
 
     private static function getSelectInscricao()
     {
-        $obCategoria = EntityCategoria::all();
+        $obCategoria = EntityCategoria::where('status', 'A')->get();
         $categorias = '';
 
         foreach ($obCategoria as $categoria) {
