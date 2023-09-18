@@ -13,7 +13,7 @@ class Login
      */
     private static function init(): void
     {
-        #VERIFICA SE A SESSÃO NÂO ESTA ATIVA
+        #VERIFICA SE A SESSÃO NÃO ESTA ATIVA
         if (session_status() != PHP_SESSION_ACTIVE) {
             session_start();
         }
