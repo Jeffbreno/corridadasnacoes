@@ -66,7 +66,7 @@ class PagSeguroController extends PageController
         ]);
 
         echo $response->getBody();
-exit;
+        exit;
         $data = json_decode($response->getBody(), true);
         echo $data['id'];
 
