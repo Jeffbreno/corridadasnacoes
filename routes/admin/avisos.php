@@ -3,7 +3,7 @@
 use App\Http\Response;
 use App\Controller\Admin;
 
-//ROTA DA LISTAGEM DE DEPOIMENTOS
+//ROTA DA LISTAGEM
 $obRouter->get('/admin/avisos', [
     'middlewares' => [
         'required-admin-login'
@@ -13,83 +13,45 @@ $obRouter->get('/admin/avisos', [
     }
 ]);
 
-//ROTA DA LISTAGEM DE DEPOIMENTOS
-$obRouter->get('/admin/inscritos/visualizar/{id}', [
-    'middlewares' => [
-        'required-admin-login'
-    ],
-    function ($id) {
-        return new Response(200, Admin\InscricoesController::getModal($id));
-    }
-]);
 
-//ROTA DE CADASTRO DE DEPOIMENTOS
-$obRouter->get('/admin/inscritos/new', [
+//ROTA DE CADASTRO
+$obRouter->get('/admin/avisos/new', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request) {
-        return new Response(200, Admin\InscricoesController::getNewInscrito($request));
+        return new Response(200, Admin\AvisosController::getNewAviso($request));
     }
 ]);
 
-//ROTA DE CADASTRO DE DEPOIMENTOS
-$obRouter->post('/admin/inscritos/new', [
+//ROTA DE CADASTRO
+$obRouter->post('/admin/avisos/new', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request) {
-        return new Response(200, Admin\InscricoesController::setNewInscrito($request));
+        return new Response(200, Admin\AvisosController::setNewAviso($request));
     }
 ]);
 
-//ROTA DE EDIÇÃO DE DEPOIMENTOS
-$obRouter->get('/admin/inscritos/{id}/edit', [
+
+//ROTA DE EXCLUSÃO
+$obRouter->get('/admin/avisos/{id}/delete', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Admin\InscricoesController::getEditInscrito($request, $id));
+        return new Response(200, Admin\AvisosController::getDeleteAviso($request, $id));
     }
 ]);
 
-
-//ROTA DE EDIÇÃO DE DEPOIMENTOS
-$obRouter->post('/admin/inscritos/{id}/edit', [
+//ROTA DE EXCLUSÃO DO AVISO
+$obRouter->post('/admin/avisos/{id}/delete', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Admin\InscricoesController::setEditInscrito($request, $id));
+        return new Response(200, Admin\AvisosController::setDeleteAviso($request, $id));
     }
 ]);
 
-//ROTA DE EXCLUSÃO DE DEPOIMENTOS
-$obRouter->get('/admin/inscritos/{id}/delete', [
-    'middlewares' => [
-        'required-admin-login'
-    ],
-    function ($request, $id) {
-        return new Response(200, Admin\InscricoesController::getDeleteInscrito($request, $id));
-    }
-]);
-
-//ROTA DE EXCLUSÃO DE DEPOIMENTOS
-$obRouter->post('/admin/inscritos/{id}/delete', [
-    'middlewares' => [
-        'required-admin-login'
-    ],
-    function ($request, $id) {
-        return new Response(200, Admin\InscricoesController::setDeleteInscrito($request, $id));
-    }
-]);
-
-//ROTA DE EXCLUSÃO DE DEPOIMENTOS
-$obRouter->get('/admin/inscritos/{id}/pagamento', [
-    'middlewares' => [
-        'required-admin-login'
-    ],
-    function ($request, $id) {
-        return new Response(200, Admin\InscricoesController::setStatusPag($request, $id));
-    }
-]);
