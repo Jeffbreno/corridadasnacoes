@@ -1,5 +1,4 @@
 <?php
-header("access-control-allow-origin: https://sandbox.pagseguro.uol.com.br");
 
 require __DIR__.'/includes/app.php';
 

@@ -563,6 +563,9 @@ section {
   background: url("../img/bg-3.png") center no-repeat;
   /* width: 100%;
   height: 645px; */
+  /* background: url("../img/img-camisa-2.jpg") center no-repeat; 
+  width: 80%;
+  height: 100vh; */
   background-size: cover;
   font-size: 22px;
 }

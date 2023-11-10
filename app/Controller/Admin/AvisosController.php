@@ -7,7 +7,7 @@ use App\Utils\View;
 use App\Model\Entity\Inscricao as EntityIncritos;
 use App\Model\Entity\Categoria as EntityCategoria;
 
-class InscricoesController extends PageController
+class AvisosController extends PageController
 {
     /**
      * Método reponsável por retornar mensagem de status
@@ -104,14 +104,14 @@ class InscricoesController extends PageController
      * Método responsável por renderizar a view de home do painel
      *
      */
-    public static function getInscrito(Request $request): string
+    public static function getAviso(Request $request): string
     {
 
         #CONTEÚDO DA HOME DE DEPOIMENTOS
-        $content = View::render('admin/inscritos/index', [
-            'botaolink' => URL . '/admin/inscritos/new',
-            'nomebotao' => 'Cadastrar novo inscrito',
-            'descricao' => 'Lista de inscritos cadastrados no site',
+        $content = View::render('admin/avisos/index', [
+            'botaolink' => URL . '/admin/avisos/new',
+            'nomebotao' => 'Enviar novo aviso',
+            'descricao' => 'Lista de avisos enviados',
             'itens' => self::getInscritoItems($request, $obPagination),
             'pagination' => parent::getPagination($request, $obPagination),
             'status' => self::getStatus($request),
@@ -119,7 +119,7 @@ class InscricoesController extends PageController
         ]);
 
         #RETORNA A PÁGINA COMPLETA
-        return parent::getPainel('Lista Inscritos', $content, 'inscritos');
+        return parent::getPainel('Avisos', $content, 'avisos');
     }
 
     /**

@@ -30,7 +30,14 @@ class PageController
             'link' => URL . '/admin/users',
             'data-feather' => 'user'
 
+        ],
+        'avisos' => [
+            'label' => 'Avisos',
+            'link' => URL . '/admin/avisos',
+            'data-feather' => 'mail'
+
         ]
+        
     ];
 
     /**

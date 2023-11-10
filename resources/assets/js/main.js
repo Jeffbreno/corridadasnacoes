@@ -80,7 +80,7 @@
   const screenWidth = window.innerWidth;
   if (selectHeader) {
     const headerScrolled = () => {
-      if (screenWidth > 768) {
+      if (screenWidth > 990) {
         if (window.scrollY > 100) {
           selectHeader.classList.add("header-scrolled");
           element.style.color = "#010066";

@@ -65,7 +65,7 @@ class SendMailController
         try {
             // Configura o destinatário
             $this->mail->addAddress($email);
-            // $this->mail->addBCC('corridadasnacoes.rn@gmail.com');
+            $this->mail->addBCC('corridadasnacoes.rn@gmail.com');
 
             // Configura o assunto e o corpo da mensagem
             $this->mail->Subject = ('Corrida das Nações "Cadastro Realizado com Sucesso!" - Nº ticket: ' . $ticket);

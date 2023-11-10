@@ -30,9 +30,7 @@
     {{header}} {{capa}} {{ACorrida}}
 
     <!-- Start #main -->
-    <main id="main">
-      {{conteudo}}
-    </main>
+    <main id="main">{{conteudo}}</main>
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
@@ -52,8 +50,15 @@
     <script src="{{URL}}/resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="{{URL}}/resources/assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="{{URL}}/resources/assets/vendor/swiper/swiper-bundle.min.js"></script>
-
+    
     <!-- Template Main JS File -->
     <script src="{{URL}}/resources/assets/js/main.js"></script>
+    <!-- SCRIPT NECESSÁRIO PARA ABRIR MODAL NA HOME AO CARREGAR A PÁGINA -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#modal-confirmacao').modal('show');
+      });
+    </script>
   </body>
 </html>

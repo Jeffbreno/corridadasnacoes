@@ -2,7 +2,6 @@
 
 use App\Http\Response;
 use App\Controller\Pages;
-use App\Controller\Pages\PagSeguroController;
 use App\Controller\Pages\SendMailController;
 
 //ROTA HOME
@@ -38,19 +37,5 @@ $obRouter->get('/tipo/inscricao', [
 $obRouter->post('/inscricao/confirmar', [
     function ($request) {
         return new Response(200, Pages\InscricoesController::getConfirmeInscricao($request));
-    }
-]);
-
-//ROTA PEDIDO PAGSEGURO
-$obRouter->get('/inscricao/confirmar/pagamento', [
-    function () {
-        return new Response(200, Pages\PagSeguroController::newPedido());
-    }
-]);
-
-//ROTA PEDIDO PAGSEGURO
-$obRouter->post('/inscricao/confirmada/transaction', [
-    function ($request) {
-        return new Response(200, Pages\PagSeguroController::returnTransaction($request));
     }
 ]);

@@ -26,9 +26,4 @@ class RequireAdminLogin
         #CONTINUA A EXECUÇÃO
         return $next($request);
     }
-
-    public function acesso(): void
-    {
-        return;
-    }
 }
