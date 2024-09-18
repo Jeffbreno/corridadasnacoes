@@ -150,7 +150,7 @@ class Request
      */
     public function getQueryParams(): array
     {
-        return $this->queryParams;
+        return $this->queryParams;;
     }
 
     /**

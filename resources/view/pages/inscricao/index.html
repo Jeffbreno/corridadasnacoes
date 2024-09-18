@@ -1,24 +1,56 @@
 <section id="inscricao">
   <div class="container mt-5">
     <div class="col-lg-8 offset-lg-2">
-      <img src="{{URL}}/resources/assets/img/primeiro-passo.png" class="img-fluid rounded-top mb-5" alt="" />
+      <img
+        src="{{URL}}/resources/assets/img/primeiro-passo.png"
+        class="img-fluid rounded-top mb-5"
+        alt=""
+      />
       <h2>Formulário de Inscrição</h2>
-      <form action="{{URL}}/enviar/inscricao" method="post" role="form" class="needs-validation" novalidate>
+      <form
+        action="{{URL}}/enviar/inscricao"
+        method="post"
+        role="form"
+        class="needs-validation"
+        novalidate
+      >
         <input type="hidden" name="categoria" value="{{categoria}}" />
         <div class="form-group">
           <label for="nome">Nome Completo</label>
-          <input type="text" name="nome" class="form-control" id="nome" placeholder="Digite seu Nome Completo" required />
+          <input
+            type="text"
+            name="nome"
+            class="form-control"
+            id="nome"
+            placeholder="Digite seu Nome Completo"
+            required
+          />
           <div class="invalid-feedback">Campo obrigatorio.</div>
         </div>
         <div class="form-group mt-3">
           <label for="email">E-mail</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="nome@exemplo.com" required />
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            id="email"
+            placeholder="nome@exemplo.com"
+            required
+          />
           <div class="invalid-feedback">Por favor, insira um email válido.</div>
         </div>
         <div class="row mt-3">
           <div class="form-group col-lg-3">
             <label for="cpf">CPF</label>
-            <input name="cpf" type="text" class="form-control" id="cpf" maxlength="14" placeholder="Digite seu CPF" required />
+            <input
+              name="cpf"
+              type="text"
+              class="form-control"
+              id="cpf"
+              maxlength="14"
+              placeholder="Digite seu CPF"
+              required
+            />
             <div class="invalid-feedback">Campo obrigatorio.</div>
           </div>
           <div class="form-group col-lg-3">
@@ -32,49 +64,102 @@
         </div>
         <div class="form-group mt-3 col-lg-3">
           <label for="data_nascimento">Data de Nascimento</label>
-          <input name="dt_nascimento" type="date" class="form-control" id="data_nascimento" required/>
+          <input
+            name="dt_nascimento"
+            type="date"
+            class="form-control"
+            id="data_nascimento"
+            required
+          />
           <div class="invalid-feedback">Campo obrigatorio.</div>
         </div>
         <div class="form-group col-lg-3 mt-3">
           <label for="celular">Celular</label>
-          <input name="celular" type="text" class="form-control" id="celular" placeholder="Celular" required/>
+          <input
+            name="celular"
+            type="text"
+            class="form-control"
+            id="celular"
+            placeholder="Celular"
+            required
+          />
           <div class="invalid-feedback">Campo obrigatorio.</div>
         </div>
         <div class="row mt-3">
           <div class="form-group col-lg-10">
             <label for="logradouro">Logradouro</label>
-            <input name="logradouro" type="text" class="form-control" id="logradouro" placeholder="Logradouro" required/>
+            <input
+              name="logradouro"
+              type="text"
+              class="form-control"
+              id="logradouro"
+              placeholder="Logradouro"
+              required
+            />
             <div class="invalid-feedback">Campo obrigatorio.</div>
           </div>
           <div class="form-group col-lg-2">
             <label for="numero">Número</label>
-            <input name="numero" type="text" class="form-control" id="numero" placeholder="Número" />
+            <input
+              name="numero"
+              type="text"
+              class="form-control"
+              id="numero"
+              placeholder="Número"
+            />
           </div>
         </div>
         <div class="row mt-3">
           <div class="form-group col-lg-6">
             <label for="complemento">Complemento</label>
-            <input name="complemento" type="text" class="form-control" id="complemento" placeholder="Complemento" />
+            <input
+              name="complemento"
+              type="text"
+              class="form-control"
+              id="complemento"
+              placeholder="Complemento"
+            />
           </div>
           <div class="form-group col-lg-6">
             <label for="bairro">Bairro</label>
-            <input name="bairro" type="text" class="form-control" id="bairro" placeholder="Bairro" required/>
+            <input
+              name="bairro"
+              type="text"
+              class="form-control"
+              id="bairro"
+              placeholder="Bairro"
+              required
+            />
             <div class="invalid-feedback">Campo obrigatorio.</div>
           </div>
         </div>
         <div class="row mt-3">
           <div class="form-group col-lg-6">
             <label for="cidade">Cidade</label>
-            <input name="cidade" type="text" class="form-control" id="cidade" placeholder="Cidade" required/>
+            <input
+              name="cidade"
+              type="text"
+              class="form-control"
+              id="cidade"
+              placeholder="Cidade"
+              required
+            />
             <div class="invalid-feedback">Campo obrigatorio.</div>
           </div>
           <div class="form-group col-lg-2">
             <label for="uf">UF</label>
-            <input name="uf" type="text" class="form-control" id="uf" placeholder="UF" required/>
+            <input
+              name="uf"
+              type="text"
+              class="form-control"
+              id="uf"
+              placeholder="UF"
+              required
+            />
             <div class="invalid-feedback">Campo obrigatorio.</div>
           </div>
         </div>
-      
+
         <div class="form-group col-md-2 mt-3">
           <label for="distancia">Distância</label>
           <select name="distancia" class="form-select">
@@ -86,12 +171,13 @@
         <div class="form-group col-md-2 mt-3">
           <label for="tamanhoCamisa">Camisa unissex tamanho:</label>
           <select name="camisa" class="form-select" id="tamanhoCamisa">
-            <option value="PP">PP (63cm X 43cm)</option>
-            <option value="P">P (65cm X 46cm)</option>
-            <option value="M">M (67cm X 50cm)</option>
-            <option value="G">G (69cm X 54cm)</option>
-            <option value="GG">GG (71cm X 57cm)</option>
-            <option value="XGG">XGG (75cm X 60cm)</option>
+            <option value="PP">PP (67cm X 48cm)</option>
+            <option value="P">P (69,5cm X 50cm)</option>
+            <option value="M">M (73cm X 502cm)</option>
+            <option value="G">G (76,5cm X 54,5cm)</option>
+            <option value="GG">GG (81cm X 59cm)</option>
+            <option value="XG">XG (83cm X 61,5cm)</option>
+            <option value="XGG">XGG (86cm X 66cm)</option>
           </select>
         </div>
 
@@ -101,26 +187,32 @@
             type="text"
             class="form-control"
             name="equipe"
-            placeholder="Caso não tenha uma equipe, favor escrever 'não tenho equipe'" required/>
+            placeholder="Caso não tenha uma equipe, favor escrever 'não tenho equipe'"
+            required
+          />
         </div>
         <div class="invalid-feedback">Campo obrigatorio.</div>
 
-        <div class="text-center">
-          <div class="tilted-button-container">
-            <button type="submit" class="tilted-button">
-              <div class="button-text">Enviar</div>
-            </button>
-            <div class="button-line"></div>
-          </div>
+        <div class="btn-botao mt-5 text-center">
+          <button type="submit">Enviar</button>
         </div>
       </form>
     </div>
   </div>
 </section>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-<script type="text/javascript" src="{{URL}}/resources/assets/js/validate.js"></script>
+<script
+  type="text/javascript"
+  src="https://code.jquery.com/jquery-1.7.2.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="{{URL}}/resources/assets/js/validate.js"
+></script>
 
 <script>
   $(document).ready(function () {

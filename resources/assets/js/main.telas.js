@@ -72,18 +72,9 @@
    * Toggle .header-scrolled class to #header when page is scrolled
    */
   let selectHeader = select("#header");
-  const element = document.querySelector(".navbar");
-  const logo = document.querySelector(".logo");
-  const toggle = document.querySelector(".mobile-nav-toggle");
   if (selectHeader) {
     const headerScrolled = () => {
-      
         selectHeader.classList.add("header-scrolled");
-        element.style.color = "#010066";
-        logo.style.marginTop  = "";
-        toggle.style.color = "#010066";
-        element.style.textShadow = "";
-        logo.style.marginTop = "15px";
     };
     window.addEventListener("load", headerScrolled);
     onscroll(document, headerScrolled);

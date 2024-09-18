@@ -1,0 +1,40 @@
+/*--------------------------------------------------------------
+# Tipo Incrição
+--------------------------------------------------------------*/
+
+#inscrica {
+  height: 100%;
+}
+
+#inscrica section {
+  padding: 60px 0;
+}
+
+#inscrica .list-group-item:hover {
+  background-color: #000066;
+  cursor: pointer;
+  color: #fff;
+}
+#inscrica section {
+  height: 100vh;
+}
+
+#inscrica section p {
+  font-size: 2rem;
+  padding-bottom: 35px;
+}
+
+/* BOTÃO COM EFEITOS NO MENU */
+
+.btn-botao button {
+  background-color: #1a2d74;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 5px 50px 5px 50px;
+}
+
+.btn-botao button:hover {
+  color: #aaaaaa;
+}

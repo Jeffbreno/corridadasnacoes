@@ -43,7 +43,7 @@ class InscricoesController extends PageController
         $resultItems = '';
 
         // RESULTADO DA PÁGINA
-        $queryInscritos = EntityIncritos::orderBy('id', 'desc')->get();
+        $queryInscritos = EntityIncritos::where('dt_cadastro','>=','2023-12-31 00:00:00')->orderBy('id', 'desc')->get();
 
         //Seta e Retorna intens por página
         $obPagination = PageController::setPaginator($request, $queryInscritos, 10);
@@ -106,6 +106,7 @@ class InscricoesController extends PageController
      */
     public static function getInscrito(Request $request): string
     {
+
 
         #CONTEÚDO DA HOME DE DEPOIMENTOS
         $content = View::render('admin/inscritos/index', [

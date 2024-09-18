@@ -31,13 +31,12 @@ class PageController
             'data-feather' => 'user'
 
         ],
-        'avisos' => [
-            'label' => 'Avisos',
-            'link' => URL . '/admin/avisos',
-            'data-feather' => 'mail'
+        'categorias' => [
+            'label' => 'Links de Incrição',
+            'link' => URL . '/admin/categorias',
+            'data-feather' => 'link'
 
         ]
-        
     ];
 
     /**

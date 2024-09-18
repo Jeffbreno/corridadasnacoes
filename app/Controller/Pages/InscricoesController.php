@@ -34,7 +34,15 @@ class InscricoesController extends PageController
 
     private static function getInscricao($categoria)
     {
-        if ($categoria == '3') {
+
+        $categoriaSelecionada = '';
+        $obCategoria = EntityCategoria::where('status', 'A')->where('id', $categoria)->get();
+
+        foreach ($obCategoria as $categoriaSelecionada) {
+            $tituloCategoria = $categoriaSelecionada->titulo; 
+        }
+
+        if (strpos($tituloCategoria, strtoupper('kids')) !== false) {
             $content = View::render('pages/inscricao/index.kids', ['categoria' => $categoria]);
         } else {
             $content = View::render('pages/inscricao/index', ['categoria' => $categoria]);

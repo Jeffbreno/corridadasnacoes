@@ -72,59 +72,21 @@
    * Toggle .header-scrolled class to #header when page is scrolled
    */
   let selectHeader = select("#header");
-  const inscricaoBotao = document.querySelectorAll(".inscricao-menu-botao");
-  const inscricaoLink = document.querySelectorAll(".inscricao-menu-link");
   const element = document.querySelector(".navbar");
-  const logo = document.querySelector(".logo");
   const toggle = document.querySelector(".mobile-nav-toggle");
-  const screenWidth = window.innerWidth;
+  const logo = document.querySelector(".logo");
+ 
   if (selectHeader) {
     const headerScrolled = () => {
-      if (screenWidth > 990) {
-        if (window.scrollY > 100) {
+        if (window.scrollY > 45) {
           selectHeader.classList.add("header-scrolled");
-          element.style.color = "#010066";
-          logo.style.marginTop = "";
-          toggle.style.color = "#010066";
-          element.style.textShadow = "";
-          inscricaoBotao.forEach(function (botao) {
-            botao.style.display = "";
-          });
-          inscricaoLink.forEach(function (link) {
-            link.style.display = "none";
-          });
+          selectHeader.classList.add("sticky-top");
+          
         } else {
           selectHeader.classList.remove("header-scrolled");
-          element.style.textShadow = "black 0.1em 0.1em 0.2em";
-          logo.style.marginTop = "15px";
-          element.style.color = "#FFF";
-          toggle.style.color = "#FFF";
-          inscricaoBotao.forEach(function (botao) {
-            botao.style.display = "none";
-          });
-          inscricaoLink.forEach(function (link) {
-            link.style.display = "";
-          });
+          selectHeader.classList.remove("sticky-top");
+          
         }
-      } else {
-        element.style.textShadow = "";
-        logo.style.marginTop = "15px";
-        inscricaoBotao.forEach(function (botao) {
-          botao.style.display = "none";
-        });
-        if (window.scrollY > 100) {
-          selectHeader.classList.add("header-scrolled");
-          element.style.color = "#010066";
-          toggle.style.color = "#010066";
-          inscricaoLink.forEach(function (link) {
-            link.style.display = "";
-          });
-        } else {
-          selectHeader.classList.remove("header-scrolled");
-          element.style.color = "#FFF";
-          toggle.style.color = "#FFF";
-        }
-      }
     };
     window.addEventListener("load", headerScrolled);
     onscroll(document, headerScrolled);

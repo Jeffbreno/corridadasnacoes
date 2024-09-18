@@ -1,27 +1,48 @@
-<header id="header" class="fixed-top header-scrolled">
+<header id="header" class="header-scrolled">
   <div class="container d-flex align-items-center justify-content-lg-between">
     <div class="logo me-auto me-lg-0" data-aos="fade-down">
       <a href="/">
-        <img src="{{URL}}/resources/assets/img/logo-menu.png" class="img-fluid" />
+        <img
+          src="{{URL}}/resources/assets/img/logo-menu.png"
+          class="img-fluid"
+        />
       </a>
     </div>
-    <nav id="navbar" data-aos="fade-down" class="navbar ml-auto order-last order-lg-0">
+    <nav
+      id="navbar"
+      data-aos="fade-down"
+      class="navbar ml-auto order-last order-lg-0"
+    >
       <ul>
-        <li><a class="nav-link scrollto" href="{{URL}}/#camisas">A Corrida</a></li>
-        <li><a class="nav-link scrollto" target="_blank" href="{{URL}}/resources/assets/files/REGULAMENTO_CORRIDA_DAS_NACOES_2023.20231808.pdf">Regulamento</a></li>
-        <li><a class="nav-link scrollto" href="{{URL}}/#percurso">Percurso</a></li>
-        <li><a class="nav-link scrollto" target="_blank" href="https://api.whatsapp.com/send?phone=558496903658">Contato</a></li>
-        <!-- <li class="inscricao-menu-botao">
+        <li>
+          <a class="nav-link scrollto" href="{{URL}}/#camisas">A corrida</a>
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            target="_blank"
+            href="{{URL}}/resources/assets/files/REGULAMENTO_CORRIDA_DAS_NACOES_2024.20240209.pdf"
+            >Regulamento</a
+          >
+        </li>
+        <li>
+          <a class="nav-link scrollto" data-bs-toggle="modal" data-bs-target="#modal-mapa" href="">Percurso</a>
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            target="_blank"
+            href="https://api.whatsapp.com/send?phone=558496903658"
+            >Contato</a
+          >
+        </li>
+        <li class="inscricao-menu-botao">
           <a class="nav-link scrollto" href="{{URL}}/tipo/inscricao">
-            <div class="tilted-button-container">
-              <button class="tilted-button">
-                <div class="button-text">Inscrições</div>
-              </button>
-              <div class="button-line"></div>
-            </div>
+            <button class="btn-inscricao">
+              <div class="button-text">Inscrições</div>
+            </button>
           </a>
-        </li> -->
-        <!-- <li class="inscricao-menu-link"><a class="nav-link scrollto" href="{{URL}}/tipo/inscricao">Inscrições</a></li> -->
+        </li>
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav>

@@ -12,5 +12,5 @@ include __DIR__ . '/admin/inscritos.php';
 //INCLUI AS ROTAS DE USUÁRIOS
 include __DIR__ . '/admin/users.php';
 
-//INCLUI AS ROTAS DE AVISOS ENVIADOS
-include __DIR__ . '/admin/avisos.php';
+//INCLUI AS ROTAS DE CATEGORIAS
+include __DIR__ . '/admin/categorias.php';

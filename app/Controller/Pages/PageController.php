@@ -125,11 +125,6 @@ class PageController
         }
     }
 
-    private static function getHeaderIncricoes()
-    {
-        return View::render('pages/header.inscricoes');
-    }
-
     /**
      * Método responsável por redenrizar o topo da página
      * @return string
@@ -185,7 +180,7 @@ class PageController
     {
         return View::render('pages/layout/layout.page.telas', [
             'titulo' => $title,
-            'header' => self::getHeaderIncricoes(),
+            'header' => self::getHeader(),
             'conteudo' => $content,
             'footer' => self::getFooter(),
         ]);

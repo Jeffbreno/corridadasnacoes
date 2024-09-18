@@ -8,6 +8,13 @@ class HomeController extends PageController
 {
 
     /**
+     * SECTION DE PROPAGANDA
+     */
+    private static function getPropaganda()
+    {
+        return View::render('pages/propaganda');
+    }
+    /**
      * SECTION DE CAMISAS
      */
     private static function getCamisas()
@@ -77,6 +84,7 @@ class HomeController extends PageController
     public static function getHome()
     {
         $content = View::render('pages/home', [
+            'propaganda' => self::getPropaganda(),
             'camisas' => self::getCamisas(),
             'maiorMelhor' => self::getMaiorMelhor(),
             'galeria' => self::getGaleria(),

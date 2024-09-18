@@ -73,7 +73,7 @@ class SendMailController
 
             $link =  "<a href=\"" . InscricoesController::getBotao($destinatario['categoria']) . "\" target=\"_blank\" title=\"Pagar com PagSeguro\"><img src=\"https://assets.pagseguro.com.br/ps-integration-assets/botoes/pagamentos/205x30-pagar.gif\" alt=\"Pague com PagSeguro - é rápido, grátis e seguro!\" /></a>";
 
-            $msg = "A primeira etapa de sua inscrição na CORRIDA DAS NAÇÕES 2023 foi concluída com sucesso!!!<br />";
+            $msg = "A primeira etapa de sua inscrição na CORRIDA DAS NAÇÕES 2024 foi concluída com sucesso!!!<br />";
             $msg .= "Estamos validando o seu seu cadastro e em breve nossa equipe entrará em contato para informar o pagamento<br /><br />";
 
             $msg .= "Obrigado(a), Atleta!<br />";
@@ -82,7 +82,7 @@ class SendMailController
 
             $msg .= '<br />Link para pagamento: <br />' . $link;
             $msg .= "<br /><br />Nome e Sobrenome: " . $nome;
-            if ($destinatario['categoria'] == 3) {
+            if ($destinatario['nome_responsavel']) {
                 $msg .= "<br />Nome e Responsável: " . $nome_responsavel;
             }
             $msg .= "<br />E-mail: " . $email;
