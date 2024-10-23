@@ -996,6 +996,50 @@ section {
   text-align: right;
 }
 
+@media (min-width: 1200px) {
+  #apoio {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 25%;
+    height: auto;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 1200px) {
+  #apoio {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40%;
+    height: auto;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  #apoio {
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 50%;
+    height: auto;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  #apoio {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 80%;
+    height: auto;
+    z-index: 1;
+  }
+}
+
 #imagem-garotinha {
   position: absolute;
   right: 0;
